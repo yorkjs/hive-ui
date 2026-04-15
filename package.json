@@ -1,6 +1,6 @@
 {
   "name": "hive-ui",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Hive UI - Taro React component library",
   "main": "src/index.ts",
   "module": "src/index.ts",

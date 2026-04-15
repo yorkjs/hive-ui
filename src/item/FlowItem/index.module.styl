@@ -1,0 +1,94 @@
+@import '../../styles/mixin.styl'
+@import '../../styles/variable.styl'
+
+.flow-item
+  display flex
+  flex-direction row
+  justify-content space-between
+  align-items center
+  padding 0PX 10PX
+  margin 0 $WING_BLANK
+  background-color var(--containerCard)
+
+  :global
+    .flow-content
+      width 100%
+      display flex
+      flex-direction row
+      justify-content space-between
+      align-items center
+      halfBorder(bottom, var(--lineBorder))
+      padding-bottom 15PX
+      padding-top 15PX
+
+    .flow-content-no-border
+      width 100%
+      display flex
+      flex-direction row
+      justify-content space-between
+      align-items center
+      padding-bottom 15PX
+      padding-top 15PX
+
+    .flow-item-left
+      display flex
+      flex-direction row
+      justify-content flex-start
+      align-items center
+      margin-right 10PX
+      flex 1
+      overflow hidden
+
+    .flow-item-icon
+      flex-shrink 0
+      width 36PX
+      height 36PX
+      margin-right 10PX
+
+      border-radius 4PX
+      display flex
+      align-items center
+      justify-content center
+      padding 2PX
+      box-sizing border-box
+
+      .icon-img
+        width 100%
+        height 100%
+
+    .flow-item-content
+      flex 1
+      display flex
+      flex-direction column
+      justify-content center
+      align-items flex-start
+      overflow hidden
+
+      .flow-item-title
+        font-size 16PX
+        color var(--textTitle)
+        text-align left
+        width 100%
+        lineClamp(1)
+
+      .flow-item-time
+        font-size 12PX
+        color var(--textMuted)
+        margin-top 5PX
+        text-align left
+
+    .flow-item-right
+      display flex
+      flex-direction column
+      justify-content center
+      align-items flex-end
+      flex-shrink 0
+
+      .flow-item-amount
+        font-size 16PX
+        color var(--textTitle)
+
+      .flow-item-desc
+        margin-top 5PX
+        font-size 12PX
+        color var(--textMuted)

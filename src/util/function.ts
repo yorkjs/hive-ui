@@ -24,3 +24,33 @@ export function formatClassNames(...args: ClassValue[]): string {
 
   return classes.join(' ')
 }
+
+type EmptyString = '' | ' '
+
+// 定义一个包含所有"空"值的联合类型
+type EmptyValue = null | undefined | EmptyString | [] | Record<string, never> | typeof NaN
+
+// 空值: {}, [], '', '   ', null, undefined, NaN
+export function isEmpty(value: any): value is EmptyValue {
+  if (value == null || Number.isNaN(value)) {
+    return true
+  }
+
+  let isEmpty = false
+  const protoType = Object.prototype.toString.call(value)
+  switch (protoType) {
+    case '[object Object]':
+      isEmpty = Object.keys(value).length === 0
+      break
+    case '[object Array]':
+      isEmpty = value.length === 0
+      break
+    case '[object String]':
+      isEmpty = value.trim().length === 0
+      break
+    default:
+      break
+  }
+
+  return isEmpty
+}
