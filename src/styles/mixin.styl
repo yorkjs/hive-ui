@@ -1,0 +1,289 @@
+@import '~@src/env/variable.styl'
+
+
+/**
+ * 清除浮动
+ */
+clearfix()
+  &:before,
+  &::after
+    content " "
+    display table
+
+  &::after
+    clear both
+
+  zoom 1
+
+/**
+ * 伪元素实现底部或顶部横线
+ */
+pseudoHLine($direction, $height, $color)
+  position relative
+  &:after
+    content ''
+    position absolute
+    {$direction} 0
+    left 0
+    right 0
+    height $height
+    background-color $color
+    transform scaleY(0.5)
+    transform-origin $direction center
+
+/**
+ * 伪元素实现左边或右边横线
+ */
+pseudoVLine($direction, $width, $color)
+  position relative
+  &:after
+    content ''
+    position absolute
+    {$direction} 0
+    top 0
+    bottom 0
+    width $width
+    background-color $color
+    transform scaleX(0.5)
+    transform-origin $direction center
+
+/**
+ * 文本结尾加省略号
+ */
+textOverflow()
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
+
+/**
+ * 文本自然换行
+ */
+wordBreak()
+  word-break break-all
+  word-wrap break-word
+  white-space pre-wrap
+
+/**
+ * 三角形
+ */
+triangle($direction, $width, $height, $color)
+  width 0
+  height 0
+
+  if $direction == 'top'
+    border-left ($width / 2) solid transparent
+    border-right ($width / 2) solid transparent
+    border-bottom $height solid $color
+
+  else if $direction == 'right'
+    border-top ($height / 2) solid transparent
+    border-bottom ($height / 2) solid transparent
+    border-left $width solid $color
+
+  else if $direction == 'bottom'
+    border-left ($width / 2) solid transparent
+    border-right ($width / 2) solid transparent
+    border-top $height solid $color
+
+  else // left
+    border-top ($height / 2) solid transparent
+    border-bottom ($height / 2) solid transparent
+    border-right $width solid $color
+
+/**
+ * 居中定位
+ */
+center($way, $vertical = 50%)
+  position $way
+  left 50%
+  top $vertical
+  transform translate(-50%, (-1 * $vertical))
+
+// flex 水平垂直居中
+flexHVCenter()
+  display flex
+  align-items center
+  justify-content center
+
+placeholder($color)
+
+  &::-webkit-input-placeholder  /* WebKit browsers */
+    color $color
+
+  &:-moz-placeholder  /* Mozilla Firefox 4 to 18 */
+    color $color
+
+  &::-moz-placeholder  /* Mozilla Firefox 19+ */
+    color $color
+
+  &:-ms-input-placeholder  /* Internet Explorer 10+ */
+    color $color
+
+
+lineClamp($count)
+  display -webkit-box
+  -webkit-line-clamp $count
+  -webkit-box-orient vertical
+  text-overflow ellipsis
+  overflow hidden
+  white-space normal
+  overflow-wrap break-word
+  word-break break-all
+
+// 设置页面垂直滚动
+scrollView()
+  height 100%
+  overflow-y auto
+  &::-webkit-scrollbar
+    display none
+
+// 设置页面水平滚动
+scrollXView()
+  width 100%
+  overflow-x auto
+  &::-webkit-scrollbar
+    display none
+
+// 设置 padding 安全区域，取最大的一方的值
+// https://juejin.cn/post/6865873665104773128
+// stylus 格式化字符串语法
+// https://www.stylus-lang.cn/docs/operators.html#sprintf
+paddingBottomSafeArea($padding)
+  padding-bottom $padding
+  padding-bottom 'calc(%s + constant(safe-area-inset-bottom))' % $padding
+  padding-bottom 'max(%s, constant(safe-area-inset-bottom))' % $padding
+  padding-bottom 'calc(%s + env(safe-area-inset-bottom))' % $padding
+  padding-bottom 'max(%s, env(safe-area-inset-bottom))' % $padding
+marginBottomSafeArea($margin)
+  margin-bottom $margin
+  margin-bottom 'calc(%s + constant(safe-area-inset-bottom))' % $margin
+  margin-bottom 'max(%s, constant(safe-area-inset-bottom))' % $margin
+  margin-bottom 'calc(%s + env(safe-area-inset-bottom))' % $margin
+  margin-bottom 'max(%s, env(safe-area-inset-bottom))' % $margin
+bottomSafeArea($bottom)
+  bottom $bottom
+  bottom 'calc(%s + constant(safe-area-inset-bottom))' % $bottom
+  bottom 'max(%s, constant(safe-area-inset-bottom))' % $bottom
+  bottom 'calc(%s + env(safe-area-inset-bottom))' % $bottom
+  bottom 'max(%s, env(safe-area-inset-bottom))' % $bottom
+
+// 设置 padding 包括安全区域
+paddingBottomWithSafeArea($padding)
+  padding-bottom $padding
+  padding-bottom 'calc(%s + constant(safe-area-inset-bottom))' % $padding
+  padding-bottom 'calc(%s + env(safe-area-inset-bottom))' % $padding
+marginBottomWithSafeArea($margin)
+  margin-bottom $margin
+  margin-bottom 'calc(%s + constant(safe-area-inset-bottom))' % $margin
+  margin-bottom 'calc(%s + env(safe-area-inset-bottom))' % $margin
+bottomWithSafeArea($bottom)
+  bottom $bottom
+  bottom 'calc(%s + constant(safe-area-inset-bottom))' % $bottom
+  bottom 'calc(%s + env(safe-area-inset-bottom))' % $bottom
+
+pageContainer()
+  background-color $brand-background
+  min-height 100%
+  box-sizing border-box
+
+// 设置背景图片，按分辨率显示
+// 写标准 css，插件会补上浏览器前缀 -webkit-image-set
+setBackgroundImage($1x, $2x, $repeat=no-repeat, $postion=0 0)
+  background $1x $repeat $postion
+  background-image image-set(
+    $1x 1x,
+    $2x 2x
+  )
+
+// 显示滚动条，兼容微信小程序滚动条样式设置
+showScrollbar()
+  &::-webkit-scrollbar
+    display block
+    width 4PX
+  &::-webkit-scrollbar-track
+    background-color #F5F5F5
+    border-radius 2PX
+  &::-webkit-scrollbar-thumb
+    background-color #ccc
+    border-radius 2PX
+  // NOTE: 微信小程序滚动条样式
+  ::-webkit-scrollbar
+    display block
+    width 4PX
+  ::-webkit-scrollbar-track
+    background-color #F5F5F5
+    border-radius 2PX
+  ::-webkit-scrollbar-thumb
+    background-color #ccc
+    border-radius 2PX
+
+@keyframes spin
+  from
+    transform translateX(-50%) rotate(0deg)
+  to
+    transform translateX(-50%) rotate(360deg)
+
+// 定义 halfBorder 函数
+// $position: 边框位置（默认全部，支持 top/right/bottom/left 或组合）
+// $color: 边框颜色（默认继承 currentColor）
+// $radius: 圆角大小（默认 0）
+halfBorder($position = top left right bottom, $color = currentColor, $radius = 0)
+  position relative
+  &::before
+    content ''
+    position absolute
+    top 0
+    left 0
+    width 200%
+    height 200%
+    box-sizing border-box
+    transform scale(0.5)
+    transform-origin left top
+    border-radius $radius // 圆角加倍补偿缩放
+    border-style solid
+    border-width 1PX
+    border-color transparent  // 默认透明
+    pointer-events none
+    z-index 1
+
+     // 添加隔离样式
+    background-clip padding-box
+    -webkit-backface-visibility hidden
+    backface-visibility hidden
+    -webkit-perspective 1000
+    perspective 1000
+
+    // 根据 $position 设置边框颜色
+    if top in $position
+      border-top-color $color
+    if right in $position
+      border-right-color $color
+    if bottom in $position
+      border-bottom-color $color
+    if left in $position
+      border-left-color $color
+
+/**
+ * @param $size 基础字号
+ */
+getPlatformFontSize($size)
+  font-size: unit($size, PX)
+
+  // iOS
+  :global(.is-ios) &
+    font-size: unit($size, PX)
+
+  // Android
+  :global(.is-android) &
+    font-size: unit($size, PX)
+
+// 扩大点击区域
+hitSlot($size)
+  &:after
+    content ''
+    position absolute
+    top ($size * -1)
+    left ($size * -1)
+    right ($size * -1)
+    bottom ($size * -1)
