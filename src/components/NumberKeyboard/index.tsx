@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
 import { View, Text, Image } from '@tarojs/components'
+
 import { formatClassNames } from '../../util/function'
+
 import styles from './index.module.styl'
 
 type KeyboardType = 'int' | 'number'
@@ -58,7 +60,7 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
               <Text className="done-text">{doneText}</Text>
             </View>
           </View>
-        ): undefined
+        ) : undefined
       }
 
       <View className={"keyboard-grid"}>
