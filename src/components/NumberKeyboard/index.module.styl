@@ -1,0 +1,74 @@
+@import '../../styles/mixin.styl'
+
+.number-keyboard-component
+  background-color var(--containerInner)
+  width 100%
+  user-select none
+  :global
+    .keyboard-header
+      height 50PX
+      display flex
+      flex-direction row
+      align-items center
+      padding 0 12PX
+      background-color var(--containerInner)
+      halfBorder(top, var(--lineBorder))
+
+      .header-placeholder
+        flex 1
+
+      .done-btn
+        height 100%
+        display flex
+        align-items center
+        justify-content center
+        padding 0 12PX
+        &:active
+          opacity 0.6
+
+      .done-text
+        font-size 18PX
+        color var(--primary)
+        font-weight 500
+
+    .keyboard-grid
+      display flex
+      flex-direction row
+      flex-wrap wrap
+      background-color var(--containerInner)
+      halfBorder(top, var(--lineBorder))
+
+    .key-item
+      width 33.333%
+      height 60PX
+      background-color var(--containerCard)
+      display flex
+      align-items center
+      justify-content center
+      box-sizing border-box
+      halfBorder(right bottom, var(--lineBorder))
+
+      // 点击反馈
+      &:active:not(.empty-key)
+        background-color var(--containerInner)
+
+      &.empty-key
+        background-color var(--containerInner)
+        cursor default
+
+      &.no-right-border
+        &:before
+          border-right none
+
+      &.last-row
+        height calc(60PX + env(safe-area-inset-bottom))
+        &:before
+          border-bottom none
+
+    .key-text
+      font-size 24PX
+      color var(--textTitle)
+
+    .delete-icon
+      width 22PX
+      height 22PX
