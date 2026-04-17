@@ -1,0 +1,145 @@
+@import '../../styles/mixin.styl'
+
+$CELL_PADDING_HORIZONTAL = 16PX
+$CELL_PADDING_VERTICAL = 14PX
+$TITLE_FONT_SIZE = 16PX
+$VALUE_FONT_SIZE = 14PX
+$DESC_FONT_SIZE = 13PX
+
+.cell-card
+  border-radius 10PX
+  overflow hidden
+  background-color var(--containerCard)
+  margin 0 $WING_BLANK
+  &.show-top-gutter
+    margin-top $GUTTER_BLANK
+  &.show-bottom-gutter
+    margin-bottom $GUTTER_BLANK
+  &.show-top-blank
+    margin-top $CARD_BLANK
+
+.cell-description
+  padding 6PX $CELL_PADDING_HORIZONTAL 0 $CELL_PADDING_HORIZONTAL
+  .desc-text
+    color var(--textMuted)
+    font-size $DESC_FONT_SIZE
+    line-height calc($DESC_FONT_SIZE + 6PX)
+    display block
+
+.cell-group
+  display flex
+  flex-direction row
+  align-items center
+  margin 0 $WING_BLANK
+  padding 20PX $CELL_PADDING_HORIZONTAL 8PX $CELL_PADDING_HORIZONTAL
+  .group-text
+    color var(--textMuted)
+    font-size $VALUE_FONT_SIZE
+
+.cell-container
+  background-color var(--containerCard)
+  padding 0 $CELL_PADDING_HORIZONTAL
+  position relative
+  transition background-color 0.1s
+
+  &.border-top
+    halfBorder(top, var(--lineBorder))
+
+  &.border-bottom
+    halfBorder(bottom, var(--lineBorder))
+
+  &.is-clickable
+    cursor pointer
+    &:active
+      background-color rgba(0, 0, 0, 0.03)
+
+.cell-inner
+  padding $CELL_PADDING_VERTICAL 0
+  display flex
+  flex-direction column
+  position relative
+
+  &.show-separator
+    halfBorder(bottom, var(--lineBorder))
+
+.is-horizontal
+  .cell-inner
+    flex-direction row
+    align-items center
+
+  .title-section
+    flex-shrink 0
+    margin-right 10PX
+
+  .content-section
+    flex 1
+    display flex
+    flex-direction row
+    justify-content flex-end
+    align-items center
+    text-align right
+
+.is-vertical
+  .header-row
+    display flex
+    flex-direction row
+    align-items center
+    justify-content space-between
+    width 100%
+
+  .title-section
+    flex 1
+
+  .content-section
+    margin-top 8PX
+    width 100%
+    display flex
+    flex-direction row
+    justify-content flex-start
+    text-align left
+
+.icon-wrapper
+  margin-right 12PX
+  display flex
+  align-items center
+  justify-content center
+
+.title-view
+  display flex
+  flex-direction row
+  align-items center
+  position relative
+
+.title-text
+  color var(--textTitle)
+  font-size $TITLE_FONT_SIZE
+  line-height 1.4
+
+.required-icon
+  position absolute
+  left -10PX
+  top 7PX
+
+.tooltip-icon
+  margin-left 4PX
+  color var(--textMuted)
+  display flex
+  align-items center
+
+.value-text
+  color var(--textContent)
+  font-size $VALUE_FONT_SIZE
+  line-height 1.4
+  lineClamp(1)
+
+.placeholder-text
+  color var(--textPlaceholder)
+  font-size $VALUE_FONT_SIZE
+  line-height 1.4
+
+.arrow-wrapper
+  margin-left 6PX
+  display flex
+  align-items center
+  color var(--textPlaceholder)
+  font-size 12PX

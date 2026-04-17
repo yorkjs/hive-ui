@@ -3,6 +3,8 @@ import { View, Text, Image } from '@tarojs/components'
 
 import { formatClassNames } from '../../util/function'
 
+import Icon from '../Icon'
+
 import styles from './index.module.styl'
 
 type KeyboardType = 'int' | 'number' | 'idCard'
@@ -101,9 +103,9 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
               {
                 isDelete
                 ? (
-                  <Image
-                    className="delete-icon"
-                    src="https://img.finstao.com/3ccf71a6e53be5a99c02b0dd7e9ed8c0.png"
+                  <Icon
+                    name="delete"
+                    size={22}
                   />
                 )
                 : (
