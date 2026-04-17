@@ -5,7 +5,7 @@ import { formatClassNames } from '../../util/function'
 
 import styles from './index.module.styl'
 
-type KeyboardType = 'int' | 'number'
+type KeyboardType = 'int' | 'number' | 'idCard'
 
 interface IProps {
   /** 键盘类型：int(整数), number(带小数点) */
@@ -16,6 +16,8 @@ interface IProps {
   onDelete: () => void
   /** 是否显示头部状态栏 */
   showHead?: boolean
+   /** 标题 */
+  title?: string
   /** 完成按钮文案 */
   doneText?: string
   /** 完成按钮点击 */
@@ -30,13 +32,20 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
     onInsert,
     onDelete,
     showHead = false,
+    title,
     doneText = '完成',
     onDone,
     className
   } = props
 
   const keys = useMemo(() => {
-    const leftBottomKey = type === 'number' ? '.' : ''
+    let leftBottomKey = ''
+    if (type === 'number') {
+      leftBottomKey = '.'
+    }
+    else if (type === 'idCard') {
+      leftBottomKey = 'X'
+    }
     return ['1', '2', '3', '4', '5', '6', '7', '8', '9', leftBottomKey, '0', 'delete']
   }, [type])
 
@@ -55,9 +64,20 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
         showHead
         ? (
           <View className="keyboard-header">
-            <View className="header-placeholder" />
-            <View className="done-btn" onClick={onDone}>
-              <Text className="done-text">{doneText}</Text>
+            <View className="header-side" />
+
+            <View className="header-main">
+              {title && (
+                <Text className="header-title" numberOfLines={1}>
+                  {title}
+                </Text>
+              )}
+            </View>
+
+            <View className="header-side side-right">
+              <View className="done-btn" onClick={onDone}>
+                <Text className="done-text">{doneText}</Text>
+              </View>
             </View>
           </View>
         ) : undefined
