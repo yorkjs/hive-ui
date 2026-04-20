@@ -5,4 +5,4 @@ export { default as Checkbox } from './components/Checkbox'
 export { default as Tag } from './components/Tag'
 
 export { default as FlowItem } from './item/FlowItem'
-export { default as ProductCard } from './item/ProductCard'
+export { default as ProductItem } from './item/ProductItem'

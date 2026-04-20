@@ -73,6 +73,10 @@ export interface IProductCardProps {
   customization?: string
   /** 做法描述最大显示行数 (默认3) */
   customizationMaxLines?: number
+  /** 套餐信息描述 */
+  combo? : string
+  /** 套餐描述最大显示行数 (默认3) */
+  comboMaxLines?: number
   /** 售价 */
   salePrice: string | number
   /** 原价 (划线价) */
@@ -118,7 +122,7 @@ const DEFAULT_LABELS: IProductCardLabels = {
   offline: '已下架'
 }
 
-const ProductCard: React.FC<IProductCardProps> = (props) => {
+const ProductItem: React.FC<IProductCardProps> = (props) => {
   const {
     image,
     title,
@@ -134,6 +138,8 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
     deliveryTypes = [],
     customization,
     customizationMaxLines = 3,
+    combo,
+    comboMaxLines = 3,
     salePrice,
     originalPrice,
     buyCount,
@@ -359,6 +365,18 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
                 )
                 : undefined
               }
+              {
+                combo
+                ? (
+                  <Text
+                    className={styles['customization-text']}
+                    style={{ WebkitLineClamp: comboMaxLines }}
+                  >
+                    {combo}
+                  </Text>
+                )
+                : undefined
+              }
             </View>
             <View className={styles['content-bottom']}>
               <View className={styles['price-container']}>
@@ -432,4 +450,4 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
   )
 }
 
-export default React.memo(ProductCard)
+export default React.memo(ProductItem)
