@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { View, Text } from '@tarojs/components'
 
+import { useTheme } from '../../config'
 import { formatClassNames } from '../../util/function'
 
 import styles from './index.module.styl'
@@ -30,7 +31,7 @@ const Tag: React.FC<TagProps> = ({
   className,
   style
 }) => {
-  const themeSelect = (light: string, dark: string) => (isDark ? dark : light)
+  const { themeSelect } = useTheme()
 
   const tagStyle = useMemo(() => {
     const colors = {

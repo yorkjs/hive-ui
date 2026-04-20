@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { View, Text } from '@tarojs/components'
 
+import { useTheme } from '../../config'
 import { isAndroid, isApp } from '../../util/env'
 import { formatClassNames } from '../../util/function'
 
@@ -18,8 +19,6 @@ export interface CheckboxProps {
   className?: string
 }
 
-const isDark = false
-
 const Checkbox: React.FC<CheckboxProps> = (props) => {
   const {
     label,
@@ -30,6 +29,8 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
     onChange,
     className,
   } = props
+
+  const { isDark } = useTheme()
 
   const handlePress = (e: any) => {
     if (disabled || readOnly) return
