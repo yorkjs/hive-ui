@@ -95,6 +95,10 @@ export interface IProductCardProps {
   action?: React.ReactNode
   /** 国际化标签注入 */
   labels?: IProductCardLabels
+  /** 是否底部分割线 */
+  showBottomBorder?: boolean
+  /** 是否隐藏底部分割线 */
+  showSeparator?: boolean
   // 卡片点击事件
   onClick?: () => void
   children?: React.ReactNode
@@ -143,6 +147,8 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
     onDelete,
     action,
     className,
+    showBottomBorder = false,
+    showSeparator = false,
     labels: customLabels,
     onClick,
     children
@@ -254,139 +260,155 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
   }, [stockCount, saleCount, labels])
 
   return (
-    <View className={formatClassNames(styles['item-container'], className)} onClick={handleCardClick}>
-      <View className={styles['card-main-body']}>
-        {showCheckbox && (
-          <View className={styles['checkbox-container']}>
-            <Checkbox
-              checked={checkboxChecked}
-              disabled={checkboxDisabled}
-              readOnly
-            />
-          </View>
-        )}
-        <View className={styles['image-container']}>
-          <Image
-            src={image?.url}
-            className={styles['product-image']}
-            mode='aspectFill'
-          />
-          {(showSoldOut || showOffline) && (
-            <View className={styles['status-overlay']}>
-              <Text className={styles['status-text']}>
-                {showSoldOut ? labels.sold_out : labels.offline}
-              </Text>
+    <View
+      className={formatClassNames(
+        styles['item-container'],
+        {
+          [styles['show-bottom-border']]: showBottomBorder,
+        },
+        className
+      )}
+      onClick={handleCardClick}
+    >
+      <View className={formatClassNames(
+        styles['card-info'],
+        {
+          [styles['show-separator']]: showSeparator
+        }
+      )}>
+        <View className={styles['card-main-body']}>
+          {showCheckbox && (
+            <View className={styles['checkbox-container']}>
+              <Checkbox
+                checked={checkboxChecked}
+                disabled={checkboxDisabled}
+                readOnly
+              />
             </View>
           )}
-        </View>
-        <View className={styles['content-container']}>
-          <View className={styles['content-body']}>
-            <View className={styles['title-row']} style={{ marginRight: showDelete ? '30PX' : '0' }}>
-              {productTypeTag}
-              <Text className={styles['title']} style={{ WebkitLineClamp: titleMaxLines }}>{title}</Text>
-            </View>
-            {(showMultipleSpec || stockCount || saleCount || barcode) && (
-              <ScrollView scrollX className={styles['second-row']} showScrollbar={false}>
-                <View className={styles['second-row-inner']}>
-                  {showMultipleSpec && <Text className={styles['primary-text']}>{labels.multiple_spec}</Text>}
-                  {showMultipleSpec && stockAndSaleElem && <View className={styles['info-line']} />}
-                  {stockAndSaleElem}
-                  {((showMultipleSpec || stockAndSaleElem) && barcode) && <View className={styles['info-line']} />}
-                  {barcode && <Text className={styles['info-text']}>{labels.barcode_label} {barcode}</Text>}
-                </View>
-              </ScrollView>
-            )}
-            {(activityType || deliveryTags) && (
-              <View className={styles['tag-row']}>
-                {activityType && labels.activity_type && (
-                  <View className={styles['activity-tag']}>
-                    {activityType === PROMOTION_ACTIVITY_TYPE_PRESENT && <View className={styles['activity-tag-badge']}><Text className={styles['activity-tag-badge-text']}>{labels.present_badge}</Text></View>}
-                    <View className={styles['activity-tag-content']}>
-                      <Text className={styles['activity-tag-text']}>
-                        {activityType === PROMOTION_ACTIVITY_TYPE_FLASH && labels.activity_type.flash}
-                        {activityType === PROMOTION_ACTIVITY_TYPE_BRAND && labels.activity_type.brand}
-                        {activityType === PROMOTION_ACTIVITY_TYPE_HOT && labels.activity_type.hot}
-                        {activityType === PROMOTION_ACTIVITY_TYPE_PRESENT && labels.activity_type.present}
-                      </Text>
-                    </View>
-                  </View>
-                )}
-                {deliveryTags}
+          <View className={styles['image-container']}>
+            <Image
+              src={image?.url}
+              className={styles['product-image']}
+              mode='aspectFill'
+            />
+            {(showSoldOut || showOffline) && (
+              <View className={styles['status-overlay']}>
+                <Text className={styles['status-text']}>
+                  {showSoldOut ? labels.sold_out : labels.offline}
+                </Text>
               </View>
             )}
-            {
-              spec
-              ? (
-                <Text
-                  className={styles['spec-text']}
-                  style={{ WebkitLineClamp: specMaxLines }}
-                >
-                  {labels.spec_label}：{spec}
-                </Text>
-              )
-              : undefined
-            }
-            {
-              customization
-              ? (
-                <Text
-                  className={styles['customization-text']}
-                  style={{ WebkitLineClamp: customizationMaxLines }}
-                >
-                  {customization}
-                </Text>
-              )
-              : undefined
-            }
           </View>
-          <View className={styles['content-bottom']}>
-            <View className={styles['price-container']}>
-              <View className={styles['price-row']}>
-                <Text className={styles['price-symbol']}>
-                  ¥
-                </Text>
-                <Text className={styles['price-value']}>
-                  {salePrice}
-                </Text>
+          <View className={styles['content-container']}>
+            <View className={styles['content-body']}>
+              <View className={styles['title-row']} style={{ marginRight: showDelete ? '30PX' : '0' }}>
+                {productTypeTag}
+                <Text className={styles['title']} style={{ WebkitLineClamp: titleMaxLines }}>{title}</Text>
               </View>
+              {(showMultipleSpec || stockCount || saleCount || barcode) && (
+                <ScrollView scrollX className={styles['second-row']} showScrollbar={false}>
+                  <View className={styles['second-row-inner']}>
+                    {showMultipleSpec && <Text className={styles['primary-text']}>{labels.multiple_spec}</Text>}
+                    {showMultipleSpec && stockAndSaleElem && <View className={styles['info-line']} />}
+                    {stockAndSaleElem}
+                    {((showMultipleSpec || stockAndSaleElem) && barcode) && <View className={styles['info-line']} />}
+                    {barcode && <Text className={styles['info-text']}>{labels.barcode_label} {barcode}</Text>}
+                  </View>
+                </ScrollView>
+              )}
+              {(activityType || deliveryTags) && (
+                <View className={styles['tag-row']}>
+                  {activityType && labels.activity_type && (
+                    <View className={styles['activity-tag']}>
+                      {activityType === PROMOTION_ACTIVITY_TYPE_PRESENT && <View className={styles['activity-tag-badge']}><Text className={styles['activity-tag-badge-text']}>{labels.present_badge}</Text></View>}
+                      <View className={styles['activity-tag-content']}>
+                        <Text className={styles['activity-tag-text']}>
+                          {activityType === PROMOTION_ACTIVITY_TYPE_FLASH && labels.activity_type.flash}
+                          {activityType === PROMOTION_ACTIVITY_TYPE_BRAND && labels.activity_type.brand}
+                          {activityType === PROMOTION_ACTIVITY_TYPE_HOT && labels.activity_type.hot}
+                          {activityType === PROMOTION_ACTIVITY_TYPE_PRESENT && labels.activity_type.present}
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                  {deliveryTags}
+                </View>
+              )}
               {
-                originalPrice
+                spec
                 ? (
-                  <Text className={styles['original-price']}>
-                    ¥{originalPrice}
+                  <Text
+                    className={styles['spec-text']}
+                    style={{ WebkitLineClamp: specMaxLines }}
+                  >
+                    {labels.spec_label}：{spec}
+                  </Text>
+                )
+                : undefined
+              }
+              {
+                customization
+                ? (
+                  <Text
+                    className={styles['customization-text']}
+                    style={{ WebkitLineClamp: customizationMaxLines }}
+                  >
+                    {customization}
                   </Text>
                 )
                 : undefined
               }
             </View>
-            <View
-              className={styles['action-area']}
-            >
-              {
-                buyCount
-                ? (
-                  <Text className={styles['buy-count-value']}>
-                    x{buyCount}
+            <View className={styles['content-bottom']}>
+              <View className={styles['price-container']}>
+                <View className={styles['price-row']}>
+                  <Text className={styles['price-symbol']}>
+                    ¥
                   </Text>
-                )
-                : action
-              }
+                  <Text className={styles['price-value']}>
+                    {salePrice}
+                  </Text>
+                </View>
+                {
+                  originalPrice
+                  ? (
+                    <Text className={styles['original-price']}>
+                      ¥{originalPrice}
+                    </Text>
+                  )
+                  : undefined
+                }
+              </View>
+              <View
+                className={styles['action-area']}
+              >
+                {
+                  buyCount
+                  ? (
+                    <Text className={styles['buy-count-value']}>
+                      x{buyCount}
+                    </Text>
+                  )
+                  : action
+                }
+              </View>
             </View>
           </View>
         </View>
+        {
+          children
+          ? (
+            <View
+              className={styles['card-footer']}
+              onClick={e => e.stopPropagation()}
+            >
+              {children}
+            </View>
+          )
+          : undefined
+        }
       </View>
-      {
-        children
-        ? (
-          <View
-            className={styles['card-footer']}
-            onClick={e => e.stopPropagation()}
-          >
-            {children}
-          </View>
-        )
-        : undefined
-      }
       {
         showDelete
         ? (
