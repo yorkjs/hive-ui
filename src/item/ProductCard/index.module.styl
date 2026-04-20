@@ -13,20 +13,18 @@ $F_BUY_COUNT = 14PX    // RN 14
 
 .item-container
   position relative
-  display flex
-  flex-direction column
-  padding 15PX 10PX
   background-color var(--containerCard)
+  padding 0 10PX
   box-sizing border-box
   &.show-bottom-border
-    border-bottom var(--lineBorder)
+    halfBorder(bottom, var(--lineBorder))
 
 .card-info
   display flex
   flex-direction column
   width 100%
+  padding 15PX 0
   &.show-separator
-    padding-bottom 15PX
     halfBorder(bottom, var(--lineBorder))
 
 .card-main-body

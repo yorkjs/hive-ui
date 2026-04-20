@@ -95,9 +95,9 @@ export interface IProductCardProps {
   action?: React.ReactNode
   /** 国际化标签注入 */
   labels?: IProductCardLabels
-  /** 是否底部分割线 */
+  /** 是否显示底部分边框 */
   showBottomBorder?: boolean
-  /** 是否隐藏底部分割线 */
+  /** 是否显示底部分割线 */
   showSeparator?: boolean
   // 卡片点击事件
   onClick?: () => void
