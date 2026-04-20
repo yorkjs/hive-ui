@@ -1,0 +1,251 @@
+@import '../../styles/mixin.styl'
+
+// 颜色与字号变量对照表 (基于 RN getStyles)
+$F_TITLE = 15PX        // RN 15
+$F_PRICE_VAL = 14PX    // RN 14
+$F_PRICE_SYM = 10PX    // RN 10
+$F_INFO = 12PX         // RN 12 (库存/销量/条码)
+$F_TAG_TYPE = 11PX     // RN 11 (商品类型实物/虚拟/服务)
+$F_TAG_NORMAL = 10PX   // RN 10 (活动标签/配送方式)
+$F_SPEC = 11PX         // RN 11
+$F_CUSTOM = 10PX       // RN 10 (做法描述)
+$F_BUY_COUNT = 14PX    // RN 14
+
+.item-container
+  position relative
+  display flex
+  flex-direction column
+  padding 15PX 10PX    // 对齐 RN: paddingVertical: 15, paddingHorizontal: 10
+  background-color var(--containerCard)
+  box-sizing border-box
+
+.card-main-body
+  display flex
+  flex-direction row
+  align-items flex-start
+  width 100%
+
+.checkbox-container
+  height 72PX           // 对齐图片高度 72
+  margin-right 10PX
+  display flex
+  justify-content center
+  align-items center
+  flex-shrink 0
+
+.image-container
+  position relative
+  margin-right 10PX
+  flex-shrink 0
+  width 72PX
+  height 72PX
+
+  .product-image
+    width 72PX
+    height 72PX
+    border-radius 10PX // 对齐 RN: IMAGE_RADIUS = 10
+    background-color var(--containerInner)
+
+  .status-overlay
+    position absolute
+    top 0
+    left 0
+    bottom 0
+    right 0
+    border-radius 10PX
+    background-color rgba(0, 0, 0, 0.3)
+    display flex
+    justify-content center
+    align-items center
+    z-index 2
+
+    .status-text
+      font-size 12PX   // 对齐 RN: 12
+      color #FFF
+      line-height 1
+
+.content-container
+  flex 1
+  display flex
+  flex-direction column
+  justify-content space-between
+  min-height 72PX
+  min-width 0          // 关键：确保内部 Flex 截断能正常工作
+
+.content-body
+  flex 1
+  display flex
+  flex-direction column
+
+.title-row
+  display flex
+  flex-direction row
+  align-items center
+  margin-bottom 2PX
+
+.product-tag-container
+  display flex
+  margin-right 8PX
+  flex-shrink 0
+  line-height 1
+
+.product-tag
+  height 15PX
+  line-height 15PX
+  padding 1PX 3PX
+  border-radius 3PX
+  font-size 9PX
+
+.title
+  flex 1
+  font-size $F_TITLE
+  color var(--textTitle)
+  line-height 1.4
+  font-weight bold
+  lineClamp(1)
+
+.second-row
+  margin-top 2PX
+  width 100%
+  white-space nowrap
+  .second-row-inner
+    display flex
+    flex-direction row
+    align-items center
+
+.info-line
+  width 1PX
+  height 10PX
+  background-color var(--textContent)
+  margin 0 5PX
+  transform scaleX(0.5)
+
+.info-text
+  font-size $F_INFO
+  color var(--textTitle)
+
+.primary-text
+  font-size $F_INFO
+  color var(--primary)
+
+.stock-and-sale
+  display flex
+  flex-direction row
+  align-items center
+  .stock-box
+    display flex
+    flex-direction row
+    margin-right 5PX
+  .stock-text
+    font-size $F_INFO
+    color var(--primary)
+    margin-left 5PX
+
+.tag-row
+  display flex
+  flex-direction row
+  align-items center
+  flex-wrap wrap
+  gap 5PX
+  margin-top 5PX
+
+.delivery-tag
+  padding 1PX 5PX
+  border-radius 3PX
+  font-size $F_TAG_NORMAL
+  border 1PX solid transparent
+
+.activity-tag
+  display flex
+  flex-direction row
+  align-items center
+  border 1PX solid #F21902 // 对齐 RN: borderColor: '#F21902'
+  border-radius 3PX
+  overflow hidden
+
+.activity-tag-badge
+  background-color #F21902
+  padding 1PX 4PX       // 对齐 RN: paddingHorizontal: 4, paddingVertical: 1
+  display flex
+  align-items center
+  justify-content center
+
+.activity-tag-badge-text
+  font-size $F_TAG_NORMAL
+  color #FFF
+  line-height 1
+
+.activity-tag-content
+  padding 1PX 5PX       // 对齐 RN: paddingHorizontal: 5, paddingVertical: 1
+
+.activity-tag-text
+  font-size $F_TAG_NORMAL
+  color #F21902
+  line-height 1
+
+.spec-text
+  font-size $F_SPEC
+  color var(--textContent)
+  line-height 15PX      // 对齐 RN: lineHeight: 15
+  margin-top 5PX        // 对齐 RN: marginTop: 5
+  lineClamp(1)
+
+.customization-text
+  font-size $F_CUSTOM
+  color var(--textMuted)
+  line-height 15PX      // 对齐 RN: lineHeight: 15
+  margin-top 5PX        // 对齐 RN: marginTop: 5
+  lineClamp(3)
+
+.content-bottom
+  display flex
+  flex-direction row
+  align-items center
+  justify-content space-between
+  margin-top 10PX       // 对齐 RN: marginTop: 10
+
+.price-container
+  display flex
+  flex-direction row
+  align-items center
+
+.price-row
+  display flex
+  flex-direction row
+  align-items baseline  // 确保符号和数值底部对齐
+
+.price-symbol
+  font-size $F_PRICE_SYM
+  color var(--textMoney)
+  font-weight bold      // 对齐 RN: FONT_WEIGHT_BOLD
+  margin-right 1PX
+
+.price-value
+  font-size $F_PRICE_VAL
+  color var(--textMoney)
+  font-weight bold      // 对齐 RN: FONT_WEIGHT_BOLD
+
+.original-price
+  font-size 11PX        // 对齐 RN: 11
+  color var(--textMuted)
+  text-decoration line-through
+  margin-left 5PX       // 对齐 RN: marginLeft: 5
+
+.buy-count-value
+  font-size $F_BUY_COUNT
+  color var(--textContent)
+  margin-left 10PX      // 对齐 RN: marginLeft: 10
+
+.delete-container
+  position absolute
+  top 16PX              // 对齐 RN: top: 16
+  right 11PX            // 对齐 RN: right: 11
+  padding 5PX           // 对齐 RN: pressHitSlop
+  z-index 10
+
+.delete-icon
+  color var(--textContent)
+
+.card-footer
+  width 100%
+  margin-top 12PX

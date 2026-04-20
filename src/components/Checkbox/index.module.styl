@@ -1,0 +1,68 @@
+@import '../../styles/mixin.styl'
+
+.checkbox-component
+  display flex
+  flex-direction row
+  align-items center
+  cursor pointer
+  position relative
+
+  &:active
+    &:not(.is-disabled)
+      opacity 0.7
+
+  &:after
+    position absolute
+    content ''
+    top -6PX
+    bottom -6PX
+    left -6PX
+    right -6PX
+
+  // 选中状态文字颜色
+  &.is-checked
+    .label-text
+      color var(--primary)
+
+  // ✨ 禁用状态逻辑：不使用透明度
+  &.is-disabled
+    cursor not-allowed
+    .label-text
+      color var(--textPlaceholder)
+
+  // 大尺寸样式
+  &.size-large
+    .checkbox-icon-container
+      width 36PX
+      height 36PX
+    .label-text
+      font-size 16PX
+      margin-left 12PX
+
+  &.size-small
+    .checkbox-icon-container
+      width 16PX
+      height 16PX
+    .label-text
+      font-size 12PX
+      margin-left 6PX
+
+  // 图标容器
+  .checkbox-icon-container
+    display flex
+    align-items center
+    justify-content center
+    width 20PX
+    height 20PX
+    line-height 1
+    flex-shrink 0 // 防止被压缩
+    overflow visible
+
+  // 文字样式
+  .label-text
+    color var(--textContent)
+    font-size 13PX
+    margin-left 6PX
+    line-height 1
+    &.is-app-android
+      padding-top 1.5PX

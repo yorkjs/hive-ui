@@ -1,5 +1,8 @@
 export { default as NumberKeyboard } from './components/NumberKeyboard'
 export { default as Cell, setCellConfig } from './components/Cell'
 export { default as Icon } from './components/Icon'
+export { default as Checkbox } from './components/Checkbox'
+export { default as Tag } from './components/Tag'
 
 export { default as FlowItem } from './item/FlowItem'
+export { default as ProductCard } from './item/ProductCard'

@@ -5,6 +5,10 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "types": "src/index.ts",
+  "sideEffects": [
+    "**/*.styl",
+    "**/*.css"
+  ],
   "files": [
     "src"
   ],

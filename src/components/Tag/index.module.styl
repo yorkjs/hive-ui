@@ -1,0 +1,29 @@
+@import '../../styles/mixin.styl'
+
+.tag-component
+  display inline-flex
+  align-items center
+  justify-content center
+  padding 0 8PX
+  height 20PX
+  line-height 20PX
+  border-radius 4PX
+  text-align center
+  font-size 12PX
+  white-space nowrap
+  box-sizing border-box
+
+  halfBorder(top left right bottom, transparent, 8PX)
+
+  .tag-text
+    line-height 1
+
+.type-default
+  &:before
+    border-color var(--lineBorder)
+  :global(.is-dark)
+    &:before
+      border-color transparent
+
+.type-primary, .type-info, .type-success, .type-error
+  border none
