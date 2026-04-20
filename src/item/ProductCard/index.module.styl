@@ -26,7 +26,7 @@ $F_BUY_COUNT = 14PX    // RN 14
   width 100%
 
 .checkbox-container
-  height 72PX           // 对齐图片高度 72
+  height 72PX
   margin-right 10PX
   display flex
   justify-content center
@@ -43,7 +43,7 @@ $F_BUY_COUNT = 14PX    // RN 14
   .product-image
     width 72PX
     height 72PX
-    border-radius 10PX // 对齐 RN: IMAGE_RADIUS = 10
+    border-radius 10PX
     background-color var(--containerInner)
 
   .status-overlay
@@ -60,7 +60,7 @@ $F_BUY_COUNT = 14PX    // RN 14
     z-index 2
 
     .status-text
-      font-size 12PX   // 对齐 RN: 12
+      font-size 12PX
       color #FFF
       line-height 1
 
@@ -70,7 +70,7 @@ $F_BUY_COUNT = 14PX    // RN 14
   flex-direction column
   justify-content space-between
   min-height 72PX
-  min-width 0          // 关键：确保内部 Flex 截断能正常工作
+  min-width 0
 
 .content-body
   flex 1
@@ -85,7 +85,8 @@ $F_BUY_COUNT = 14PX    // RN 14
 
 .product-tag-container
   display flex
-  margin-right 8PX
+  align-items center
+  margin-right 5PX
   flex-shrink 0
   line-height 1
 
@@ -116,9 +117,8 @@ $F_BUY_COUNT = 14PX    // RN 14
 .info-line
   width 1PX
   height 10PX
-  background-color var(--textContent)
   margin 0 5PX
-  transform scaleX(0.5)
+  halfBorder(left, var(--textContent))
 
 .info-text
   font-size $F_INFO
@@ -153,19 +153,25 @@ $F_BUY_COUNT = 14PX    // RN 14
   padding 1PX 5PX
   border-radius 3PX
   font-size $F_TAG_NORMAL
-  border 1PX solid transparent
+  height 15PX
+  line-height 15PX
 
 .activity-tag
   display flex
   flex-direction row
   align-items center
-  border 1PX solid #F21902 // 对齐 RN: borderColor: '#F21902'
+  halfBorder(top left right bottom, #F21902, 6PX)
+  height 15PX
+  line-height 15PX
   border-radius 3PX
   overflow hidden
 
 .activity-tag-badge
+  padding 0 3PX
+  height 100%
   background-color #F21902
-  padding 1PX 4PX       // 对齐 RN: paddingHorizontal: 4, paddingVertical: 1
+  border-top-left-radius 3PX
+  border-bottom-right-radius 3PX
   display flex
   align-items center
   justify-content center
@@ -176,7 +182,8 @@ $F_BUY_COUNT = 14PX    // RN 14
   line-height 1
 
 .activity-tag-content
-  padding 1PX 5PX       // 对齐 RN: paddingHorizontal: 5, paddingVertical: 1
+  display flex
+  padding 1PX 5PX
 
 .activity-tag-text
   font-size $F_TAG_NORMAL
@@ -186,15 +193,15 @@ $F_BUY_COUNT = 14PX    // RN 14
 .spec-text
   font-size $F_SPEC
   color var(--textContent)
-  line-height 15PX      // 对齐 RN: lineHeight: 15
-  margin-top 5PX        // 对齐 RN: marginTop: 5
+  line-height 15PX
+  margin-top 5PX
   lineClamp(1)
 
 .customization-text
   font-size $F_CUSTOM
   color var(--textMuted)
-  line-height 15PX      // 对齐 RN: lineHeight: 15
-  margin-top 5PX        // 对齐 RN: marginTop: 5
+  line-height 15PX
+  margin-top 5PX
   lineClamp(3)
 
 .content-bottom
@@ -202,7 +209,7 @@ $F_BUY_COUNT = 14PX    // RN 14
   flex-direction row
   align-items center
   justify-content space-between
-  margin-top 10PX       // 对齐 RN: marginTop: 10
+  margin-top 5PX
 
 .price-container
   display flex
@@ -212,35 +219,35 @@ $F_BUY_COUNT = 14PX    // RN 14
 .price-row
   display flex
   flex-direction row
-  align-items baseline  // 确保符号和数值底部对齐
+  align-items baseline
 
 .price-symbol
   font-size $F_PRICE_SYM
   color var(--textMoney)
-  font-weight bold      // 对齐 RN: FONT_WEIGHT_BOLD
+  font-weight bold
   margin-right 1PX
 
 .price-value
   font-size $F_PRICE_VAL
   color var(--textMoney)
-  font-weight bold      // 对齐 RN: FONT_WEIGHT_BOLD
+  font-weight bold
 
 .original-price
-  font-size 11PX        // 对齐 RN: 11
+  font-size 11PX
   color var(--textMuted)
   text-decoration line-through
-  margin-left 5PX       // 对齐 RN: marginLeft: 5
+  margin-left 5PX
 
 .buy-count-value
   font-size $F_BUY_COUNT
   color var(--textContent)
-  margin-left 10PX      // 对齐 RN: marginLeft: 10
+  margin-left 10PX
 
 .delete-container
   position absolute
-  top 16PX              // 对齐 RN: top: 16
-  right 11PX            // 对齐 RN: right: 11
-  padding 5PX           // 对齐 RN: pressHitSlop
+  top 16PX
+  right 11PX
+  padding 5PX
   z-index 10
 
 .delete-icon

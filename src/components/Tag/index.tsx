@@ -30,7 +30,6 @@ const Tag: React.FC<TagProps> = ({
   className,
   style
 }) => {
-
   const themeSelect = (light: string, dark: string) => (isDark ? dark : light)
 
   const tagStyle = useMemo(() => {
@@ -92,6 +91,20 @@ const Tag: React.FC<TagProps> = ({
     return mapping[type] || mapping.default
   }, [type])
 
+  const finalStyle = useMemo(() => {
+    const s: React.CSSProperties & { [key: string]: any } = {
+      backgroundColor: tagStyle.backgroundColor,
+      color: tagStyle.color,
+      ...style,
+    }
+
+    if (style?.borderColor) {
+      s['--tag-border-color'] = style.borderColor
+    }
+
+    return s
+  }, [tagStyle, style])
+
   return (
     <View
       className={formatClassNames(
@@ -99,11 +112,7 @@ const Tag: React.FC<TagProps> = ({
         styles[`type-${type}`],
         className
       )}
-      style={{
-        backgroundColor: tagStyle.backgroundColor,
-        color: tagStyle.color,
-        ...style
-      }}
+      style={finalStyle}
     >
       <Text
         className={styles['tag-text']}

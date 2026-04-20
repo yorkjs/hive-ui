@@ -13,17 +13,19 @@
   white-space nowrap
   box-sizing border-box
 
-  halfBorder(top left right bottom, transparent, 8PX)
+  halfBorder(top left right bottom, var(--tag-border-color, transparent), 8PX)
 
   .tag-text
     line-height 1
 
 .type-default
-  &:before
-    border-color var(--lineBorder)
+  --tag-border-color: var(--lineBorder)
   :global(.is-dark)
-    &:before
-      border-color transparent
+    --tag-border-color: transparent
+
+.tag-component:before
+  border-color: var(--tag-border-color, transparent)
+
 
 .type-primary, .type-info, .type-success, .type-error
   border none

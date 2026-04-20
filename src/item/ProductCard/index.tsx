@@ -170,9 +170,18 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
   const productTypeTag = useMemo(() => {
     if (productType === undefined) return null
     const colorMap: Record<number, { color: string; text: string | undefined }> = {
-    [MALL_PRODUCT_TYPE_REAL]: { color: 'var(--primary)', text: labels.product_type?.real },
-    [MALL_PRODUCT_TYPE_VIRTUAL]: { color: '#E4B700', text: labels.product_type?.virtual },
-    [MALL_PRODUCT_TYPE_SERVICE]: { color: '#03BE02', text: labels.product_type?.service },
+    [MALL_PRODUCT_TYPE_REAL]: {
+      color: 'var(--primary)',
+      text: labels.product_type?.real
+    },
+    [MALL_PRODUCT_TYPE_VIRTUAL]: {
+      color: '#E4B700',
+      text: labels.product_type?.virtual
+    },
+    [MALL_PRODUCT_TYPE_SERVICE]: {
+      color: '#03BE02',
+      text: labels.product_type?.service
+    },
   }
     const item = colorMap[productType]
     if (!item) return null
@@ -193,11 +202,25 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
     return deliveryTypes.map(type => {
       let tagProps: any = null
       if (type === MALL_PRODUCT_DELIVERY_TYPE_DINE) {
-        tagProps = { text: labels.delivery_type?.dine, color: '#2db7f5', bg: 'rgba(145, 213, 255, 0.16)' }
-      } else if (type === MALL_PRODUCT_DELIVERY_TYPE_SELF) {
-        tagProps = { text: labels.delivery_type?.self_pickup, color: '#FF3D15', bg: 'rgba(255,61,21,0.16)' }
-      } else if (type === MALL_PRODUCT_DELIVERY_TYPE_EXPRESS || type === MALL_PRODUCT_DELIVERY_TYPE_SHOP) {
-        tagProps = { text: labels.delivery_type?.delivery, color: '#FF8901', bg: 'rgba(255,137,1,0.16)' }
+        tagProps = {
+          text: labels.delivery_type?.dine,
+          color: '#2db7f5',
+          bg: 'rgba(145, 213, 255, 0.16)'
+        }
+      }
+      else if (type === MALL_PRODUCT_DELIVERY_TYPE_SELF) {
+        tagProps = {
+          text: labels.delivery_type?.self_pickup,
+          color: '#FF3D15',
+          bg: 'rgba(255,61,21,0.16)'
+        }
+      }
+      else if (type === MALL_PRODUCT_DELIVERY_TYPE_EXPRESS || type === MALL_PRODUCT_DELIVERY_TYPE_SHOP) {
+        tagProps = {
+          text: labels.delivery_type?.delivery,
+          color: '#FF8901',
+          bg: 'rgba(255,137,1,0.16)'
+        }
       }
       if (!tagProps) return null
       return (
@@ -222,7 +245,9 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
           </View>
         )}
         {saleCount && (
-          <Text className={styles['info-text']}>{labels.sale_label} {saleCount}</Text>
+          <Text className={styles['info-text']}>
+            {labels.sale_label} {saleCount}
+          </Text>
         )}
       </View>
     )
@@ -233,14 +258,24 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
       <View className={styles['card-main-body']}>
         {showCheckbox && (
           <View className={styles['checkbox-container']}>
-            <Checkbox checked={checkboxChecked} disabled={checkboxDisabled} readOnly />
+            <Checkbox
+              checked={checkboxChecked}
+              disabled={checkboxDisabled}
+              readOnly
+            />
           </View>
         )}
         <View className={styles['image-container']}>
-          <Image src={image?.url} className={styles['product-image']} mode='aspectFill' />
+          <Image
+            src={image?.url}
+            className={styles['product-image']}
+            mode='aspectFill'
+          />
           {(showSoldOut || showOffline) && (
             <View className={styles['status-overlay']}>
-              <Text className={styles['status-text']}>{showSoldOut ? labels.sold_out : labels.offline}</Text>
+              <Text className={styles['status-text']}>
+                {showSoldOut ? labels.sold_out : labels.offline}
+              </Text>
             </View>
           )}
         </View>
@@ -279,20 +314,98 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
                 {deliveryTags}
               </View>
             )}
-            {spec && <Text className={styles['spec-text']} style={{ WebkitLineClamp: specMaxLines }}>{labels.spec_label}：{spec}</Text>}
-            {customization && <Text className={styles['customization-text']} style={{ WebkitLineClamp: customizationMaxLines }}>{customization}</Text>}
+            {
+              spec
+              ? (
+                <Text
+                  className={styles['spec-text']}
+                  style={{ WebkitLineClamp: specMaxLines }}
+                >
+                  {labels.spec_label}：{spec}
+                </Text>
+              )
+              : undefined
+            }
+            {
+              customization
+              ? (
+                <Text
+                  className={styles['customization-text']}
+                  style={{ WebkitLineClamp: customizationMaxLines }}
+                >
+                  {customization}
+                </Text>
+              )
+              : undefined
+            }
           </View>
           <View className={styles['content-bottom']}>
             <View className={styles['price-container']}>
-              <View className={styles['price-row']}><Text className={styles['price-symbol']}>¥</Text><Text className={styles['price-value']}>{salePrice}</Text></View>
-              {originalPrice && <Text className={styles['original-price']}>¥{originalPrice}</Text>}
+              <View className={styles['price-row']}>
+                <Text className={styles['price-symbol']}>
+                  ¥
+                </Text>
+                <Text className={styles['price-value']}>
+                  {salePrice}
+                </Text>
+              </View>
+              {
+                originalPrice
+                ? (
+                  <Text className={styles['original-price']}>
+                    ¥{originalPrice}
+                  </Text>
+                )
+                : undefined
+              }
             </View>
-            <View className={styles['action-area']}>{buyCount ? <Text className={styles['buy-count-value']}>x{buyCount}</Text> : action}</View>
+            <View
+              className={styles['action-area']}
+            >
+              {
+                buyCount
+                ? (
+                  <Text className={styles['buy-count-value']}>
+                    x{buyCount}
+                  </Text>
+                )
+                : action
+              }
+            </View>
           </View>
         </View>
       </View>
-      {children && <View className={styles['card-footer']} onClick={e => e.stopPropagation()}>{children}</View>}
-      {showDelete && <View className={styles['delete-container']} onClick={(e: ITouchEvent) => { e.stopPropagation(); onDelete?.(); }}><Icon name='trash' size={13} className={styles['delete-icon']} /></View>}
+      {
+        children
+        ? (
+          <View
+            className={styles['card-footer']}
+            onClick={e => e.stopPropagation()}
+          >
+            {children}
+          </View>
+        )
+        : undefined
+      }
+      {
+        showDelete
+        ? (
+          <View
+            className={styles['delete-container']}
+            onClick={(e: ITouchEvent) => {
+              e.stopPropagation()
+              onDelete?.()
+            }}
+          >
+            <Icon
+              name='trash'
+              size={13}
+              className={styles['delete-icon']}
+            />
+          </View>
+        )
+        : undefined
+      }
     </View>
   )
 }
