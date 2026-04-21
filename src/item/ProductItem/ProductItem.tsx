@@ -62,6 +62,8 @@ export interface IProductCardProps {
   saleCount?: string | number
   /** 商品条码 */
   barcode?: string
+  /** 自定义标签 */
+  customTags?: React.ReactNode
   /** 规格描述文案 (如: 红色, 大号) */
   spec?: string
   /** 规格描述最大显示行数 (默认1) */
@@ -113,6 +115,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     title,
     titleMaxLines = 1,
     productType,
+    customTags,
     showMultipleSpec,
     stockCount,
     saleCount,
@@ -229,7 +232,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     })
   }, [deliveryTypes, labels])
 
-    const stockAndSaleElem = useMemo(() => {
+  const stockAndSaleElem = useMemo(() => {
     if (!stockCount && !saleCount) return null
     return (
       <View className={styles['stock-and-sale']}>
@@ -306,6 +309,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
                   </View>
                 </ScrollView>
               )}
+              {customTags}
               {(activityType || deliveryTags) && (
                 <View className={styles['tag-row']}>
                   {activityType && labels.activity_type && (
