@@ -16,7 +16,8 @@ let globalLabels: IProductCardLabels = {
     flash: '秒杀活动',
     brand: '品牌活动',
     hot: '热点活动',
-    present: '买赠活动'
+    present: '买赠活动',
+    full_discount: '满件折扣'
   },
   present_badge: '赠',
   stock_label: '库存',

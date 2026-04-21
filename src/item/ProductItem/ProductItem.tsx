@@ -19,6 +19,7 @@ import {
   PROMOTION_ACTIVITY_TYPE_BRAND,
   PROMOTION_ACTIVITY_TYPE_HOT,
   PROMOTION_ACTIVITY_TYPE_PRESENT,
+  PROMOTION_ACTIVITY_TYPE_COUNT_DISCOUNT,
 } from '../../constant/mall'
 import { getProductItemConfig } from './config'
 
@@ -27,7 +28,7 @@ import styles from './index.module.styl'
 export interface IProductCardLabels {
   product_type?: { real: string; virtual: string; service: string }
   delivery_type?: { dine: string; self_pickup: string; delivery: string }
-  activity_type?: { flash: string; brand: string; hot: string; present: string }
+  activity_type?: { flash: string; brand: string; hot: string; present: string; full_discount: string }
   present_badge?: string
   stock_label?: string
   sale_label?: string
@@ -321,6 +322,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
                           {activityType === PROMOTION_ACTIVITY_TYPE_BRAND && labels.activity_type.brand}
                           {activityType === PROMOTION_ACTIVITY_TYPE_HOT && labels.activity_type.hot}
                           {activityType === PROMOTION_ACTIVITY_TYPE_PRESENT && labels.activity_type.present}
+                          {activityType === PROMOTION_ACTIVITY_TYPE_COUNT_DISCOUNT && labels.activity_type.full_discount}
                         </Text>
                       </View>
                     </View>

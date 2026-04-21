@@ -1,0 +1,63 @@
+@import '../../styles/mixin.styl'
+@import '../../styles/variable.styl'
+
+$CELL_PADDING_HORIZONTAL = 16PX
+$CELL_PADDING_VERTICAL = 14PX
+
+.field-card-container
+  border-radius 10PX
+  background-color var(--containerCard)
+  margin 0 $WING_BLANK
+  margin-bottom 12PX
+  overflow hidden
+
+.card-header
+  display flex
+  flex-direction row
+  align-items center
+  justify-content space-between
+  padding $CELL_PADDING_VERTICAL $CELL_PADDING_HORIZONTAL
+  position relative
+  min-height 48PX
+  box-sizing border-box
+  halfBorder(bottom, var(--lineBorder))
+
+  .header-left
+    flex 1
+    display flex
+    flex-direction row
+    align-items center
+    min-width 0
+
+    .header-title
+      color var(--textTitle)
+      font-size 16PX
+      lineClamp(1)
+
+    .edit-icon-wrapper
+      padding 4PX 8PX
+      margin-left 2PX
+      display flex
+      align-items center
+      justify-content center
+      border-radius 4PX
+      transition background-color 0.2s
+
+      &:active
+        background-color rgba(0, 0, 0, 0.05)
+
+      .edit-icon
+        color var(--textMuted)
+
+  .header-extra
+    margin-left 12PX
+    flex-shrink 0
+    display flex
+    align-items center
+
+    .action-text
+      color #FF4D4F
+      font-size 14PX
+      padding 4PX
+      &:active
+        opacity 0.6
