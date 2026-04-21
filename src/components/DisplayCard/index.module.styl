@@ -1,0 +1,56 @@
+@import '../../styles/mixin.styl'
+@import '../../styles/variable.styl'
+
+$CELL_PADDING_HORIZONTAL = 10PX
+$CELL_PADDING_VERTICAL = 15PX
+$LABEL_MARGIN_RIGHT = 20PX
+
+.display-card
+  padding $CELL_PADDING_VERTICAL $CELL_PADDING_HORIZONTAL
+  background-color var(--containerCard)
+  margin 0 $WING_BLANK
+  border-radius 10PX
+  &.show-top-gutter
+    margin-top $GUTTER_BLANK
+  &.show-bottom-gutter
+    margin-bottom $GUTTER_BLANK
+  &.show-top-blank
+    margin-top $CARD_BLANK
+
+  .card-header
+    display flex
+    justify-content space-between
+    align-items center
+    margin-bottom 15PX
+
+    .header-title
+      font-size 16PX
+      font-weight bold
+      color var(--textTitle)
+
+    .header-extra
+      font-size 14PX
+      color var(--textMuted)
+
+  .info-row
+    display flex
+    flex-direction row
+    align-items flex-start
+    margin-bottom 15PX
+    &:last-child
+      margin-bottom 0
+
+    .info-label
+      font-size 14PX
+      color var(--textContent)
+      flex-shrink 0
+      margin-right $LABEL_MARGIN_RIGHT
+      min-width 70PX
+
+    .info-value
+      flex 1
+      font-size 14PX
+      color var(--textTitle)
+      word-break break-all
+      display flex
+      flex-direction row
