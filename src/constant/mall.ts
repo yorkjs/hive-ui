@@ -2,6 +2,8 @@
 export const MALL_PRODUCT_TYPE_REAL    = 1
 export const MALL_PRODUCT_TYPE_VIRTUAL = 2
 export const MALL_PRODUCT_TYPE_SERVICE = 3
+// 前端定义的字段后台不存在
+export const MALL_PRODUCT_TYPE_COMBO = 4
 
 // 快递发货
 export const MALL_PRODUCT_DELIVERY_TYPE_EXPRESS = 1

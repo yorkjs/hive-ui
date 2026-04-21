@@ -5,7 +5,8 @@ let globalLabels: IProductCardLabels = {
   product_type: {
     real: '实物',
     virtual: '虚拟',
-    service: '服务'
+    service: '服务',
+    combo: '套餐'
   },
   delivery_type: {
     dine: '堂食',

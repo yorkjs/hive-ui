@@ -20,13 +20,14 @@ import {
   PROMOTION_ACTIVITY_TYPE_HOT,
   PROMOTION_ACTIVITY_TYPE_PRESENT,
   PROMOTION_ACTIVITY_TYPE_COUNT_DISCOUNT,
+  MALL_PRODUCT_TYPE_COMBO,
 } from '../../constant/mall'
 import { getProductItemConfig } from './config'
 
 import styles from './index.module.styl'
 
 export interface IProductCardLabels {
-  product_type?: { real: string; virtual: string; service: string }
+  product_type?: { real: string; virtual: string; service: string; combo: string }
   delivery_type?: { dine: string; self_pickup: string; delivery: string }
   activity_type?: { flash: string; brand: string; hot: string; present: string; full_discount: string }
   present_badge?: string
@@ -180,6 +181,10 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     [MALL_PRODUCT_TYPE_SERVICE]: {
       color: '#03BE02',
       text: labels.product_type?.service
+    },
+    [MALL_PRODUCT_TYPE_COMBO] : {
+      color: '#E4B700',
+      text: labels.product_type?.combo
     },
   }
     const item = colorMap[productType]
