@@ -62,8 +62,12 @@ $DESC_FONT_SIZE = 13PX
   &.show-separator
     halfBorder(bottom, var(--lineBorder))
 
+.cell-main
+  width 100%
+  display flex
+
 .is-horizontal
-  .cell-inner
+  .cell-main
     flex-direction row
     align-items center
 
@@ -80,6 +84,9 @@ $DESC_FONT_SIZE = 13PX
     text-align right
 
 .is-vertical
+  .cell-main
+    flex-direction column
+
   .header-row
     display flex
     flex-direction row
@@ -97,6 +104,10 @@ $DESC_FONT_SIZE = 13PX
     flex-direction row
     justify-content flex-start
     text-align left
+
+.cell-extra-children
+  width 100%
+  display block
 
 .icon-wrapper
   margin-right 12PX

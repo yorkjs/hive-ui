@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from '@tarojs/components'
+import { ITouchEvent, Text } from '@tarojs/components'
 
 import { formatClassNames } from '../../util/function'
 
@@ -10,14 +10,28 @@ export interface CellValueProps {
   value?: string | number
   placeholder?: string | number
   maxLines?: number
+  onClick?:(event: ITouchEvent) => void
 }
 
-const CellValue: React.FC<CellValueProps> = ({ value, placeholder, maxLines, className }) => {
+const CellValue: React.FC<CellValueProps> = ({
+  value,
+  placeholder,
+  maxLines,
+  className,
+  onClick,
+}) => {
   const hasValue = value !== undefined && value !== null && value !== ''
 
-    const dynamicStyle: React.CSSProperties = maxLines !== 1 ? {
-      WebkitLineClamp: maxLines,
-    } : {}
+  const dynamicStyle: React.CSSProperties = maxLines !== 1 ? {
+    WebkitLineClamp: maxLines,
+  } : {}
+
+  const handlePress = (e: ITouchEvent) => {
+    if (onClick) {
+      e.stopPropagation()
+      onClick(e)
+    }
+  }
 
   if (hasValue) {
     return (
@@ -27,6 +41,7 @@ const CellValue: React.FC<CellValueProps> = ({ value, placeholder, maxLines, cla
           className
         )}
         style={dynamicStyle}
+        onClick={handlePress}
       >
         {value}
       </Text>
@@ -35,10 +50,13 @@ const CellValue: React.FC<CellValueProps> = ({ value, placeholder, maxLines, cla
 
   if (placeholder !== undefined && placeholder !== null) {
     return (
-      <Text className={formatClassNames(
-        styles['placeholder-text'],
-        className
-      )}>
+      <Text
+        className={formatClassNames(
+          styles['placeholder-text'],
+          className
+        )}
+        onClick={handlePress}
+      >
         {placeholder}
       </Text>
     )

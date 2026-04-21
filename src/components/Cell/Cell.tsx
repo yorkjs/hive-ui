@@ -79,72 +79,84 @@ const Cell: React.FC<CellProps> = (props) => {
   return (
     <View className={containerClass} onClick={onClick}>
       <View className={innerClass}>
-        {
-          vertical ? (
-            <>
-              <View className={styles['header-row']}>
-                <View style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  flex: 1
-                }}>
-                  {
-                    icon
-                    ? (
-                      <View className={styles['icon-wrapper']}>
-                        {icon}
-                      </View>
-                    ) : undefined
-                  }
-                  <View className={styles['title-section']}>
+        <View className={styles['cell-main']}>
+          {
+            vertical ? (
+              <>
+                <View className={styles['header-row']}>
+                  <View style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    flex: 1
+                  }}>
                     {
-                      typeof title === 'string'
-                      ? <CellTitle title={title} required={required} tooltip={tooltip} />
-                      : title
+                      icon
+                      ? (
+                        <View className={styles['icon-wrapper']}>
+                          {icon}
+                        </View>
+                      ) : undefined
                     }
+                    <View className={styles['title-section']}>
+                      {
+                        typeof title === 'string'
+                        ? <CellTitle title={title} required={required} tooltip={tooltip} />
+                        : title
+                      }
+                    </View>
                   </View>
+                  {
+                    showArrow
+                    ? <View className={styles['arrow-wrapper']}><CellArrow /></View>
+                    : undefined
+                  }
+                </View>
+                <View className={styles['content-section']}>
+                  {renderContent()}
+                </View>
+              </>
+            )
+            : (
+              <>
+                {
+                  icon
+                  ? <View className={styles['icon-wrapper']}>{icon}</View>
+                  : undefined
+                }
+                <View
+                  className={styles['title-section']}
+                  style={titleWidth ? { width: `${titleWidth}px` } : { maxWidth: '60%' }}
+                >
+                  {
+                    typeof title === 'string'
+                    ? <CellTitle title={title} required={required} tooltip={tooltip} />
+                    : title
+                  }
+                </View>
+                <View className={styles['content-section']}>
+                  {renderContent()}
                 </View>
                 {
                   showArrow
                   ? <View className={styles['arrow-wrapper']}><CellArrow /></View>
                   : undefined
                 }
-              </View>
-              <View className={styles['content-section']}>
-                {renderContent()}
-              </View>
-            </>
+              </>
+            )
+          }
+        </View>
+        {
+          children
+          ? (
+            <View
+              className={styles['cell-extra-children']}
+            >
+              {children}
+            </View>
           )
-          : (
-            <>
-              {
-                icon
-                ? <View className={styles['icon-wrapper']}>{icon}</View>
-                : undefined
-              }
-              <View
-                className={styles['title-section']}
-                style={titleWidth ? { width: `${titleWidth}px` } : { maxWidth: '60%' }}
-              >
-                {
-                  typeof title === 'string'
-                  ? <CellTitle title={title} required={required} tooltip={tooltip} />
-                  : title
-                }
-              </View>
-              <View className={styles['content-section']}>
-                {renderContent()}
-              </View>
-              {
-                showArrow
-                ? <View className={styles['arrow-wrapper']}><CellArrow /></View>
-                : undefined
-              }
-            </>
-          )
-        }
-        {children}
+          : undefined
+          }
       </View>
     </View>
   )
