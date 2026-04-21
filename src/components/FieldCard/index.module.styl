@@ -1,25 +1,23 @@
 @import '../../styles/mixin.styl'
 @import '../../styles/variable.styl'
 
-$CELL_PADDING_HORIZONTAL = 16PX
 $CELL_PADDING_VERTICAL = 14PX
 
 .field-card-container
   border-radius 10PX
   background-color var(--containerCard)
-  margin 0 $WING_BLANK
-  margin-bottom 12PX
   overflow hidden
+
+.card-head-wrapper
+  padding 0PX $CELL_PADDING_VERTICAL
 
 .card-header
   display flex
   flex-direction row
   align-items center
   justify-content space-between
-  padding $CELL_PADDING_VERTICAL $CELL_PADDING_HORIZONTAL
+  padding 13PX 0PX
   position relative
-  min-height 48PX
-  box-sizing border-box
   halfBorder(bottom, var(--lineBorder))
 
   .header-left
@@ -31,11 +29,11 @@ $CELL_PADDING_VERTICAL = 14PX
 
     .header-title
       color var(--textTitle)
-      font-size 16PX
+      font-size 14PX
+      line-height 1
       lineClamp(1)
 
     .edit-icon-wrapper
-      padding 4PX 8PX
       margin-left 2PX
       display flex
       align-items center
@@ -56,8 +54,7 @@ $CELL_PADDING_VERTICAL = 14PX
     align-items center
 
     .action-text
-      color #FF4D4F
-      font-size 14PX
-      padding 4PX
+      color var(--primary)
+      font-size 13PX
       &:active
         opacity 0.6

@@ -48,30 +48,47 @@ const FieldCard: React.FC<FieldCardProps> = (props) => {
 
   return (
     <View className={formatClassNames(styles['field-card-container'], className)}>
-      <View className={styles['card-header']}>
-        <View className={styles['header-left']}>
-          {typeof title === 'string' ? (
-            <Text className={styles['header-title']}>{title}</Text>
-          ) : (
-            title
-          )}
+      <View className={styles['card-head-wrapper']}>
+        <View className={styles['card-header']}>
+          <View className={styles['header-left']}>
+            {
+              typeof title === 'string'
+              ? (
+                <Text className={styles['header-title']}>{title}</Text>
+              )
+              : (
+                title
+              )
+            }
 
-          {showEditIcon && (
-            <View className={styles['edit-icon-wrapper']} onClick={handleEditClick}>
-              <Icon name='edit' size={14} className={styles['edit-icon']} />
+            {showEditIcon && (
+              <View className={styles['edit-icon-wrapper']} onClick={handleEditClick}>
+                <Icon
+                  name='edit'
+                  size={14}
+                  className={styles['edit-icon']}
+                />
+              </View>
+            )}
+          </View>
+
+          {extra && (
+            <View className={styles['header-extra']} onClick={handleExtraClick}>
+              {
+                typeof extra === 'string' ? (
+                  <Text
+                    className={styles['action-text']}
+                  >
+                    {extra}
+                  </Text>
+                )
+                : (
+                  extra
+                )
+              }
             </View>
           )}
         </View>
-
-        {extra && (
-          <View className={styles['header-extra']} onClick={handleExtraClick}>
-            {typeof extra === 'string' ? (
-              <Text className={styles['action-text']}>{extra}</Text>
-            ) : (
-              extra
-            )}
-          </View>
-        )}
       </View>
 
       <View className={styles['card-content']}>
