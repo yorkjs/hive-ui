@@ -1,0 +1,14 @@
+@import '../../styles/mixin.styl'
+@import '../../styles/variable.styl'
+
+.card
+  border-radius 10PX
+  overflow hidden
+  background-color var(--containerCard)
+  margin 0 $WING_BLANK
+  &.show-top-gutter
+    margin-top $GUTTER_BLANK
+  &.show-bottom-gutter
+    margin-bottom $GUTTER_BLANK
+  &.show-top-blank
+    margin-top $CARD_BLANK
