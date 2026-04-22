@@ -1,5 +1,7 @@
 import Taro from "@tarojs/taro"
 
+export const pixelRatio = Taro.getWindowInfo().pixelRatio
+
 // 支付宝小程序
 export const isAlipayApp = Taro.getEnv() === Taro.ENV_TYPE.ALIPAY
 // 微信小程序

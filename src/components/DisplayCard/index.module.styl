@@ -1,14 +1,14 @@
 @import '../../styles/mixin.styl'
 @import '../../styles/variable.styl'
 
-$CELL_PADDING_HORIZONTAL = 10PX
-$CELL_PADDING_VERTICAL = 15PX
+$PADDING = 15PX
 $LABEL_MARGIN_RIGHT = 20PX
 
 .display-card
-  padding $CELL_PADDING_VERTICAL $CELL_PADDING_HORIZONTAL
+  padding $PADDING
   background-color var(--containerCard)
-  margin 0 $WING_BLANK
+  margin-left $WING_BLANK
+  margin-right $WING_BLANK
   border-radius 10PX
   &.show-top-gutter
     margin-top $GUTTER_BLANK
