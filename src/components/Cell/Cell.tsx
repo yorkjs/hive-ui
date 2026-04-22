@@ -23,6 +23,8 @@ export interface CellProps {
   showSeparator?: boolean
   showTopBorder?: boolean
   showBottomBorder?: boolean
+  clickable?: boolean
+  readOnly?: boolean
   onClick?: () => void
   className?: string
   children?: React.ReactNode
@@ -43,18 +45,25 @@ const Cell: React.FC<CellProps> = (props) => {
     showSeparator = false,
     showTopBorder = false,
     showBottomBorder = false,
+    clickable,
+    readOnly = false,
     onClick,
     className,
     children
   } = props
 
+  const finalRequired = readOnly ? false : required
+  const finalShowArrow = readOnly ? false : showArrow
+  const isClickable = readOnly ? false : (clickable !== undefined ? clickable : !!onClick)
+
   const containerClass = formatClassNames(
     styles['cell-container'],
     vertical ? styles['is-vertical'] : styles['is-horizontal'],
     {
-      [styles['is-clickable']]: !!onClick,
+      [styles['is-clickable']]: isClickable,
       [styles['border-top']]: showTopBorder,
       [styles['border-bottom']]: showBottomBorder,
+      [styles['is-readonly']]: readOnly
     },
     className
   )
@@ -77,7 +86,10 @@ const Cell: React.FC<CellProps> = (props) => {
   }
 
   return (
-    <View className={containerClass} onClick={onClick}>
+    <View
+      className={containerClass}
+      onClick={readOnly ? undefined : onClick}
+    >
       <View className={innerClass}>
         <View className={styles['cell-main']}>
           {
@@ -101,13 +113,19 @@ const Cell: React.FC<CellProps> = (props) => {
                     <View className={styles['title-section']}>
                       {
                         typeof title === 'string'
-                        ? <CellTitle title={title} required={required} tooltip={tooltip} />
+                        ? (
+                          <CellTitle
+                            title={title}
+                            required={finalRequired}
+                            tooltip={tooltip}
+                          />
+                        )
                         : title
                       }
                     </View>
                   </View>
                   {
-                    showArrow
+                    finalShowArrow
                     ? <View className={styles['arrow-wrapper']}><CellArrow /></View>
                     : undefined
                   }
@@ -130,7 +148,13 @@ const Cell: React.FC<CellProps> = (props) => {
                 >
                   {
                     typeof title === 'string'
-                    ? <CellTitle title={title} required={required} tooltip={tooltip} />
+                    ? (
+                      <CellTitle
+                        title={title}
+                        required={finalRequired}
+                        tooltip={tooltip}
+                      />
+                    )
                     : title
                   }
                 </View>
@@ -138,7 +162,7 @@ const Cell: React.FC<CellProps> = (props) => {
                   {renderContent()}
                 </View>
                 {
-                  showArrow
+                  finalShowArrow
                   ? <View className={styles['arrow-wrapper']}><CellArrow /></View>
                   : undefined
                 }
