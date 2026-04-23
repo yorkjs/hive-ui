@@ -22,7 +22,7 @@ export interface AlertProps {
   onClose?: () => void
   showAnimation?: boolean
   duration?: number
-  onChange?: () => void
+  onClick?: () => void
   showArrow?: boolean
   borderRadius?: number
   className?: string
@@ -47,7 +47,7 @@ const Alert: React.FC<AlertProps> = ({
   onClose,
   showAnimation = false,
   duration = 0,
-  onChange,
+  onClick,
   showArrow = false,
   borderRadius = 0,
   className,
@@ -110,7 +110,7 @@ const Alert: React.FC<AlertProps> = ({
       handleClose()
     }
 
-    onChange?.()
+    onClick?.()
   }
 
   useEffect(() => {
@@ -125,7 +125,7 @@ const Alert: React.FC<AlertProps> = ({
   return (
     <View
       className={formatClassNames(styles['alert-container'], className, {
-        [styles['is-pressable']]: !!onChange,
+        [styles['is-pressable']]: !!onClick,
         [styles['show-animation']]: showAnimation,
         [styles['is-leaving']]: isLeaving
       })}
@@ -249,7 +249,7 @@ const Alert: React.FC<AlertProps> = ({
             </View>
           )}
 
-          {(showArrow || (!showArrow && onChange)) && !closable && (
+          {(showArrow || (!showArrow && onClick)) && !closable && (
             <Icon
               name="right"
               color={config.color}

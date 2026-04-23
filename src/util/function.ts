@@ -147,7 +147,6 @@ export default function getResponsiveImage(options: IGetResponsiveImageOptions):
     const mode = noCrop ? 2 : 1
     finalUrl += `?imageView2/${mode}/${suffix.join('/')}`
   }
-  console.log("🚀 ~ getResponsiveImage ~ finalUrl:", finalUrl)
 
   return formatAssetUrl(finalUrl)
 }

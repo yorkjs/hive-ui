@@ -14,7 +14,7 @@ interface IProps {
   /** 标题 */
   title?: string
   /** 时间或下方副标题 */
-  time?: string
+  time?: string | React.ReactNode
   /** 右侧金额 */
   amount?: string | number
   /** 金额颜色，不传默认 */
@@ -80,9 +80,17 @@ const FlowItem: React.FC<IProps> = (props) => {
             {
               !isEmpty(time)
               ? (
-                <Text className="flow-item-time">
-                  {time}
-                </Text>
+                <View className="flow-item-time-container">
+                  {
+                    typeof time === 'string'
+                    ? (
+                      <Text className="flow-item-time">{time}</Text>
+                    )
+                    : (
+                      time
+                    )
+                  }
+                </View>
               )
               : undefined
             }
