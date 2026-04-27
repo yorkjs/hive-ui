@@ -5,6 +5,7 @@ import { formatClassNames } from '../../util/function'
 import styles from './index.module.styl'
 
 export interface CardProps {
+  warpClassName?: string
   className?: string
   showTopGutter?: boolean
   showBottomGutter?: boolean
@@ -14,36 +15,46 @@ export interface CardProps {
   onClick?: () => void
 }
 
-const CellCard: React.FC<CardProps> = ({
+const Card: React.FC<CardProps> = ({
   showTopGutter = false,
   showBottomGutter = false,
   showTopBlank = false,
   clickable,
   onClick,
+  warpClassName,
   className,
   children
 }) => {
   const isClickable = clickable !== undefined ? clickable : !!onClick
 
-  const combinedClass = formatClassNames(
-    styles['card'],
+  const containerClass = formatClassNames(
+    styles['card-container'],
     {
-      [styles['is-clickable']]: isClickable,
       [styles['show-top-gutter']]: showTopGutter,
       [styles['show-bottom-gutter']]: showBottomGutter,
       [styles['show-top-blank']]: showTopBlank,
+    },
+    warpClassName
+  )
+
+  const innerClass = formatClassNames(
+    'card-inner',
+    {
+      'is-clickable': isClickable,
     },
     className
   )
 
   return (
-    <View
-      className={combinedClass}
-      onClick={onClick}
-    >
-      {children}
+    <View className={containerClass}>
+      <View
+        className={innerClass}
+        onClick={onClick}
+      >
+        {children}
+      </View>
     </View>
   )
 }
 
-export default CellCard
+export default Card
