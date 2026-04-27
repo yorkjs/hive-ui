@@ -97,13 +97,13 @@ $F_BUY_COUNT = 14PX    // RN 14
   margin-right 5PX
   flex-shrink 0
   line-height 1
-
-.product-tag
-  height 15PX
-  line-height 15PX
-  padding 1PX 3PX
-  border-radius 3PX
-  font-size 10PX
+  :global
+    .product-tag
+      height 15PX
+      line-height 15PX
+      padding 1PX 3PX
+      border-radius 3PX
+      font-size 10PX
 
 .title
   flex 1
@@ -156,13 +156,13 @@ $F_BUY_COUNT = 14PX    // RN 14
   flex-wrap wrap
   gap 5PX
   margin-top 5PX
-
-.delivery-tag
-  padding 1PX 5PX
-  border-radius 3PX
-  font-size $F_TAG_NORMAL
-  height 15PX
-  line-height 15PX
+  :global
+    .delivery-tag
+      padding 1PX 5PX
+      border-radius 3PX
+      font-size $F_TAG_NORMAL
+      height 15PX
+      line-height 15PX
 
 .activity-tag
   display flex
@@ -257,9 +257,9 @@ $F_BUY_COUNT = 14PX    // RN 14
   right 11PX
   padding 5PX
   z-index 10
-
-.delete-icon
-  color var(--textContent)
+  :global
+    .delete-icon
+      color var(--textContent)
 
 .card-footer
   width 100%

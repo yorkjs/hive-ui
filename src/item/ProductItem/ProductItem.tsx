@@ -194,7 +194,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
         <Tag
           type='light-warning'
           text={item.text}
-          className={styles['product-tag']}
+          className="product-tag"
           style={{ backgroundColor: item.color, color: '#fff' }}
         />
       </View>
@@ -232,7 +232,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
           key={type}
           text={tagProps.text}
           style={{ color: tagProps.color, backgroundColor: tagProps.bg, borderColor: tagProps.color }}
-          className={styles['delivery-tag']}
+          className="delivery-tag"
         />
       )
     })
@@ -434,7 +434,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
             <Icon
               name='trash'
               size={13}
-              className={styles['delete-icon']}
+              className="delete-icon"
             />
           </View>
         )
