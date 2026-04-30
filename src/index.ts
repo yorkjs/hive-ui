@@ -10,6 +10,7 @@ export { default as DisplayCard } from './components/DisplayCard'
 export { default as Card } from './components/Card'
 export { default as RemoteImage } from './components/RemoteImage'
 export { default as Alert } from './components/Alert'
+export { default as Switch } from './components/Switch'
 
 export { default as FlowItem } from './item/FlowItem'
 export { default as ProductItem, setProductItemConfig } from './item/ProductItem'

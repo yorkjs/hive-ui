@@ -1,0 +1,24 @@
+@import '../../styles/mixin.styl'
+
+.switch-component
+  &.is-readonly
+    opacity 0.8
+    cursor default
+  &.is-disabled
+    cursor not-allowed
+
+  :global
+    .weui-switch, .wx-switch-input
+      border-color var(--switch-inactive-color) !important
+      background-color var(--switch-inactive-color) !important
+
+      &:before
+        background-color var(--switch-inactive-color) !important
+        border-color var(--switch-inactive-color) !important
+
+      &:checked, &.wx-switch-input-checked
+        border-color var(--switch-active-color) !important
+        background-color var(--switch-active-color) !important
+        &:before
+          background-color var(--switch-active-color) !important
+          border-color var(--switch-active-color) !important
