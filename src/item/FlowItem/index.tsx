@@ -10,9 +10,11 @@ import styles from './index.module.styl'
 
 interface IProps {
   /** 左侧图标链接 */
-  icon?: string
+  icon?: string | React.ReactNode
   /** 标题 */
   title?: string
+  /** 标题右侧的额外内容（如标签、状态） */
+  titleExtra?: React.ReactNode
   /** 时间或下方副标题 */
   time?: string | React.ReactNode
   /** 右侧金额 */
@@ -35,6 +37,7 @@ const FlowItem: React.FC<IProps> = (props) => {
     icon,
     title,
     time,
+    titleExtra,
     amount,
     amountColor,
     desc,
@@ -43,6 +46,29 @@ const FlowItem: React.FC<IProps> = (props) => {
     onClick,
     className
   } = props
+
+  const renderIcon = () => {
+    if (isEmpty(icon)) return null
+
+    if (typeof icon === 'string') {
+      return (
+        <View className="flow-item-icon">
+          <Image
+            src={icon}
+            className="icon-img"
+            mode="aspectFit"
+          />
+        </View>
+      )
+    }
+
+    // 如果是自定义元素
+    return (
+      <View className="flow-item-icon-custom">
+        {icon}
+      </View>
+    )
+  }
 
   return (
     <View
@@ -54,29 +80,30 @@ const FlowItem: React.FC<IProps> = (props) => {
     >
       <View className={showSeparator ? 'flow-content-no-border' : 'flow-content'}>
         <View className="flow-item-left">
-          {
-            !isEmpty(icon)
-            ? (
-              <View className="flow-item-icon">
-                <Image
-                  src={icon}
-                  className="icon-img"
-                  mode="aspectFit"
-                />
-              </View>
-            ) : undefined
-          }
+          {renderIcon()}
 
           <View className="flow-item-content">
-            {
-              !isEmpty(title)
-              ? (
-                <Text className="flow-item-title">
-                  {title}
-                </Text>
-              )
-              : undefined
-            }
+
+            <View className="flow-item-title-row">
+              {
+                !isEmpty(title)
+                ? (
+                  <Text className="flow-item-title">
+                    {title}
+                  </Text>
+                )
+                : undefined
+              }
+              {
+                !isEmpty(titleExtra)
+                ? (
+                  <View className="flow-item-title-extra">
+                    {titleExtra}
+                  </View>
+                )
+                : undefined
+              }
+            </View>
             {
               !isEmpty(time)
               ? (
