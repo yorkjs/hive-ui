@@ -13,4 +13,5 @@ export { default as Alert } from './components/Alert'
 export { default as Switch } from './components/Switch'
 
 export { default as FlowItem } from './item/FlowItem'
+export { default as ListItem } from './item/ListItem'
 export { default as ProductItem, setProductItemConfig } from './item/ProductItem'
