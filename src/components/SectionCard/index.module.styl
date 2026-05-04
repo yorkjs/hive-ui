@@ -1,0 +1,59 @@
+@import '../../styles/mixin.styl'
+@import '../../styles/variable.styl'
+
+.section-card-wrapper
+  display flex
+  flex-direction column
+
+  &.show-top-gutter
+    margin-top $GUTTER_BLANK
+
+  &.show-bottom-gutter
+    margin-bottom $GUTTER_BLANK
+
+  &.show-top-blank
+    margin-top 15PX
+
+.section-header
+  padding 0 12PX
+  font-size 15PX
+  color var(--textContent)
+  line-height 21PX
+  margin 0 12PX
+  margin-bottom 11PX
+
+.section-card-body
+  overflow hidden
+
+.main-content
+  padding 13PX 15PX
+  display flex
+  flex-direction row
+  justify-content space-between
+  align-items center
+
+  // &.is-clickable:active
+  //   background-color rgba(0, 0, 0, 0.02)
+
+.info-body
+  flex 1
+  min-width 0
+
+.info-title
+  font-size 16PX
+  color var(--textTitle)
+  line-height 23PX
+  margin-bottom 4PX
+
+.info-desc
+  font-size 12PX
+  color var(--textContent)
+  line-height 17PX
+
+.arrow-box
+  margin-left 12PX
+  flex-shrink 0
+
+.section-footer
+  width 100%
+  border-top 1PX solid var(--lineBorder)
