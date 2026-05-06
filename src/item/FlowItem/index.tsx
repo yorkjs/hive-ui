@@ -25,7 +25,7 @@ interface IProps {
   desc?: string
   /** 描述文字颜色 */
   descColor?: string
-  /** 是否隐藏底部分割线 */
+  /** 是否显示底部分割线 */
   showSeparator?: boolean
   /** 点击事件 */
   onClick?: () => void
@@ -42,7 +42,7 @@ const FlowItem: React.FC<IProps> = (props) => {
     amountColor,
     desc,
     descColor,
-    showSeparator = false,
+    showSeparator = true,
     onClick,
     className
   } = props
@@ -78,7 +78,7 @@ const FlowItem: React.FC<IProps> = (props) => {
       )}
       onClick={onClick}
     >
-      <View className={showSeparator ? 'flow-content-no-border' : 'flow-content'}>
+      <View className={showSeparator ? 'flow-content' : 'flow-content-no-border'}>
         <View className="flow-item-left">
           {renderIcon()}
 
