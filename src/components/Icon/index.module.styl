@@ -1,0 +1,15 @@
+.has-hitSlop
+  position relative
+  display inline-block
+  vertical-align middle
+
+  &:after
+    content ''
+    position absolute
+    top var(--hit-slop-top, 0)
+    right var(--hit-slop-right, 0)
+    bottom var(--hit-slop-bottom, 0)
+    left var(--hit-slop-left, 0)
+
+    background-color transparent
+    z-index 1
