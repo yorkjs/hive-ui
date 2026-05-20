@@ -104,6 +104,7 @@ const ListItem: React.FC<ListItemCardProps> = (props) => {
                 name="right"
                 size={13}
                 color={arrowColor}
+                style={{ lineHeight: '22px' }}
                 className={styles['internal-arrow']}
               />
             )}

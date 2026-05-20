@@ -56,9 +56,9 @@ const Icon: React.FC<IconProps> = (props) => {
   }, [hitSlop])
 
   const iconStyle: React.CSSProperties = {
+    lineHeight: 1,
     ...style,
     ...hitSlopVars,
-    lineHeight: 1,
     color: color,
     fontSize: typeof size === 'number' ? `${size}PX` : size
   }
