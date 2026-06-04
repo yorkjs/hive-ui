@@ -87,7 +87,7 @@ function isResponsiveImage(uri: string) {
     && (uri.indexOf('clouddn') > 0 || uri.indexOf('img.finstao.com') > 0)
 }
 
-const imagePixelRatio = Math.min(2, pixelRatio || 2)
+const DEFAULT_IMAGE_PIXEL_RATIO = Math.max(2, pixelRatio || 2)
 
 export interface IWatermarkOptions {
   text?: string
@@ -102,6 +102,7 @@ export interface IGetResponsiveImageOptions {
   height?: number
   noCrop?: boolean
   quality?: string | number
+  imagePixelRatio?: number
   supportWebp?: boolean
 }
 
@@ -115,6 +116,7 @@ export default function getResponsiveImage(options: IGetResponsiveImageOptions):
     height,
     noCrop,
     quality,
+    imagePixelRatio: customPixelRatio
   } = options
 
   if (!url) return ''
@@ -124,15 +126,17 @@ export default function getResponsiveImage(options: IGetResponsiveImageOptions):
     return url
   }
 
+  const ratio = customPixelRatio || DEFAULT_IMAGE_PIXEL_RATIO
+
   const suffix: string[] = []
 
   if (typeof width === 'number') {
-    const w = Math.floor(width * imagePixelRatio)
+    const w = Math.floor(width * ratio)
     suffix.push('w', w.toString())
   }
 
   if (typeof height === 'number') {
-    const h = Math.floor(height * imagePixelRatio)
+    const h = Math.floor(height * ratio)
     suffix.push('h', h.toString())
   }
 

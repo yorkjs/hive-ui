@@ -12,6 +12,7 @@ export interface IRemoteImageProps extends Omit<ImageProps, 'src'> {
   height?: number
   /** 是否不进行裁剪（等比缩放） */
   noCrop?: boolean
+  imagePixelRatio?: number
   /** 图片质量 1-100 */
   quality?: string | number
   /** 自定义样式类 */
@@ -25,6 +26,7 @@ const RemoteImage: React.FC<IRemoteImageProps> = (props) => {
     height = 50,
     noCrop = false,
     quality,
+    imagePixelRatio,
     mode = 'aspectFill',
     className,
     ...restProps
@@ -37,9 +39,9 @@ const RemoteImage: React.FC<IRemoteImageProps> = (props) => {
       height,
       noCrop,
       quality,
+      imagePixelRatio
     })
   }, [url, width, height, noCrop, quality])
-  console.log("🚀 ~ RemoteImage ~ responsiveSrc:", responsiveSrc)
 
   const containerStyle: React.CSSProperties = {
     width: width ? `${width}px` : 'auto',
