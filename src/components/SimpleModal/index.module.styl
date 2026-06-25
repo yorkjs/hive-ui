@@ -1,0 +1,53 @@
+@import '../../styles/mixin.styl'
+
+.simple-modal-root
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  z-index 1500
+  display flex
+  align-items center
+  justify-content center
+  pointer-events auto
+
+  :global
+    .modal-main-wrapper
+      position relative
+      z-index 1501
+      width 80%
+      max-width 320PX
+      display flex
+      flex-direction column
+      align-items center
+
+    .modal-content-box
+      width 100%
+      background-color #fff
+      border-radius 10PX
+      padding 15PX
+      box-sizing border-box
+      overflow hidden
+      animation modal-show 0.3s ease-out
+
+    .modal-close-section
+      display flex
+      flex-direction column
+      align-items center
+      margin-top 24PX
+
+      .close-circle-btn
+        display flex
+        align-items center
+        justify-content center
+        &:active
+          opacity 0.7
+
+@keyframes modal-show
+  from
+    transform scale(0.8)
+    opacity 0
+  to
+    transform scale(1)
+    opacity 1
