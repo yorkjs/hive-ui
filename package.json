@@ -1,6 +1,6 @@
 {
   "name": "@yorkjs/hive-ui",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Hive UI - Taro React component library",
   "main": "src/index.ts",
   "module": "src/index.ts",
