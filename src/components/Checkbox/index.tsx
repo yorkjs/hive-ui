@@ -42,7 +42,7 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
   const getIconColor = () => {
     if (disabled) return 'var(--extraColor)'
     if (checked) return 'var(--primary)'
-    return isDark ? '#ffffff' : 'var(--textPlaceholder)'
+    return 'var(--textPlaceholder)'
   }
 
   const iconName = checked ? 'check-circle-fill' : 'circle'
