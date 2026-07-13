@@ -8,7 +8,7 @@
   &::before
     z-index 2
 
-.header
+.table-header
   display flex
   align-items stretch
   background var(--containerInner)
@@ -18,10 +18,10 @@
   &::before
     z-index 1
 
-.body
+.table-body
   position relative
 
-.row
+.table-row
   display flex
   align-items stretch
   background var(--containerCard)
@@ -32,7 +32,7 @@
   &:not(:last-child)::before
     z-index 1
 
-.cell
+.table-cell
   display flex
   padding 6PX 10PX
   box-sizing border-box
@@ -40,7 +40,7 @@
   &:not(:last-child)
     halfBorder(right, var(--lineBorder))
 
-.header-text
+.table-header-text
   width 100%
   font-size 14PX
   color var(--textTitle)
@@ -49,7 +49,7 @@
   overflow hidden
   text-overflow ellipsis
 
-.cell-text
+.table-cell-text
   width 100%
   font-size 13PX
   color var(--textTitle)
