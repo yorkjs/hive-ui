@@ -24,7 +24,7 @@ export interface ListItemCardProps {
   showTopGutter?: boolean
   /** 是否显示底边距 (通常 10PX) */
   showBottomGutter?: boolean
-  /** 是否显示顶部大留白 (通常 16PX) */
+  /** 是否显示顶部大留白 (通常 10PX) */
   showTopBlank?: boolean
   /** 是否显示底部分割线 */
   showSeparator?: boolean
