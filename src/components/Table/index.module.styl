@@ -1,0 +1,57 @@
+@import '../../styles/mixin.styl'
+
+.table
+  overflow hidden
+  border-radius 4PX
+  position relative
+  halfBorder(top left right bottom, var(--lineBorder), 8PX)
+  &::before
+    z-index 2
+
+.header
+  display flex
+  align-items stretch
+  background var(--containerInner)
+  position relative
+  z-index 1
+  halfBorder(bottom, var(--lineBorder))
+  &::before
+    z-index 1
+
+.body
+  position relative
+
+.row
+  display flex
+  align-items stretch
+  background var(--containerCard)
+  position relative
+  z-index 1
+  &:not(:last-child)
+    halfBorder(bottom, var(--lineBorder))
+  &:not(:last-child)::before
+    z-index 1
+
+.cell
+  display flex
+  padding 6PX 10PX
+  box-sizing border-box
+  min-width 0
+  &:not(:last-child)
+    halfBorder(right, var(--lineBorder))
+
+.header-text
+  width 100%
+  font-size 14PX
+  color var(--textTitle)
+  line-height 18PX
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+
+.cell-text
+  width 100%
+  font-size 13PX
+  color var(--textTitle)
+  line-height 18PX
+  lineClamp(1)

@@ -18,3 +18,9 @@ export { default as SimpleModal } from './components/SimpleModal'
 export { default as FlowItem } from './item/FlowItem'
 export { default as ListItem } from './item/ListItem'
 export { default as ProductItem, setProductItemConfig } from './item/ProductItem'
+
+export {
+  default as Table,
+  type TableProps,
+  type TableColumn,
+} from './components/Table'
