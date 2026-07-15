@@ -6,12 +6,10 @@ import { formatClassNames } from '../../util/function'
 import styles from './index.module.styl'
 
 export interface TableColumn<T extends object> {
-  /** 列唯一标识 */
-  key: string
+  /** 对应数据字段；同时作为列标识 */
+  dataIndex: keyof T
   /** 列标题，支持自定义节点 */
   title: React.ReactNode
-  /** 对应数据字段；不传时仅通过 render 展示 */
-  dataIndex?: keyof T
   /** 列宽度；数字按 PX 处理，字符串原样使用 */
   width?: number | string
   /**
@@ -20,7 +18,7 @@ export interface TableColumn<T extends object> {
    * @param record 当前行数据
    * @param index 当前行索引
    */
-  render?: (value: T[keyof T] | undefined, record: T, index: number) => React.ReactNode
+  render?: (value: T[keyof T], record: T, index: number) => React.ReactNode
 }
 
 export interface TableProps<T extends object> {
@@ -118,7 +116,7 @@ function Table<T extends object>(props: TableProps<T>) {
         {
           columns.map(column => (
             <View
-              key={column.key}
+              key={String(column.dataIndex)}
               className={styles['table-cell']}
               style={getCellStyle(column.width)}
             >
@@ -140,16 +138,14 @@ function Table<T extends object>(props: TableProps<T>) {
               >
                 {
                   columns.map(column => {
-                    const value = column.dataIndex != null
-                      ? record[column.dataIndex]
-                      : undefined
+                    const value = record[column.dataIndex]
                     const content = column.render
                       ? column.render(value, record, rowIndex)
                       : value
 
                     return (
                       <View
-                        key={`${currentRowKey}-${column.key}`}
+                        key={`${currentRowKey}-${String(column.dataIndex)}`}
                         className={styles['table-cell']}
                         style={getCellStyle(column.width)}
                       >
