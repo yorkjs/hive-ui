@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { View, Text } from '@tarojs/components'
 
 import { formatClassNames } from '../../util/function'
@@ -145,4 +145,4 @@ const Progress: FC<ProgressProps> = ({
   )
 }
 
-export default Progress
+export default React.memo(Progress)
