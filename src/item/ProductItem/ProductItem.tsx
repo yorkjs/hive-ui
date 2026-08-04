@@ -381,16 +381,16 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
                   <Text className={styles['price-value']}>
                     {salePrice}
                   </Text>
+                  {
+                    originalPrice
+                    ? (
+                      <Text className={styles['original-price']}>
+                        ¥{originalPrice}
+                      </Text>
+                    )
+                    : undefined
+                  }
                 </View>
-                {
-                  originalPrice
-                  ? (
-                    <Text className={styles['original-price']}>
-                      ¥{originalPrice}
-                    </Text>
-                  )
-                  : undefined
-                }
               </View>
               <View
                 className={styles['action-area']}
