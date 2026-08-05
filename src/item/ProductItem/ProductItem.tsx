@@ -82,6 +82,8 @@ export interface IProductCardProps {
   combo? : string
   /** 套餐描述最大显示行数 (默认3) */
   comboMaxLines?: number
+  /** 售价前缀 */
+  salePricePrefix?: React.ReactNode
   /** 售价 */
   salePrice: string | number
   /** 原价 (划线价) */
@@ -130,6 +132,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     customizationMaxLines = 3,
     combo,
     comboMaxLines = 3,
+    salePricePrefix,
     salePrice,
     originalPrice,
     buyCount,
@@ -375,6 +378,11 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
             <View className={styles['content-bottom']}>
               <View className={styles['price-container']}>
                 <View className={styles['price-row']}>
+                  {
+                    salePricePrefix
+                    ? salePricePrefix
+                    : undefined
+                  }
                   <Text className={styles['price-symbol']}>
                     ¥
                   </Text>
