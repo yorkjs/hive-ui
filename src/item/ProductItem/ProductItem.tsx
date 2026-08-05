@@ -377,12 +377,12 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
             </View>
             <View className={styles['content-bottom']}>
               <View className={styles['price-container']}>
+                {
+                  salePricePrefix
+                  ? salePricePrefix
+                  : undefined
+                }
                 <View className={styles['price-row']}>
-                  {
-                    salePricePrefix
-                    ? salePricePrefix
-                    : undefined
-                  }
                   <Text className={styles['price-symbol']}>
                     ¥
                   </Text>
