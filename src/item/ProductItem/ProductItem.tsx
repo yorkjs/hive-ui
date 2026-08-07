@@ -318,7 +318,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
                   </View>
                 </ScrollView>
               )}
-              {(activityType || deliveryTags) && (
+              {(activityType || deliveryTags || customTags) && (
                 <View className={styles['tag-row']}>
                   {activityType && labels.activity_type && (
                     <View className={styles['activity-tag']}>
