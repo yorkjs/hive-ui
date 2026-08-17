@@ -25,3 +25,13 @@ export {
   type TableProps,
   type TableColumn,
 } from './components/Table'
+
+export {
+  default as RichTextEditor,
+  type RichTextEditorProps,
+  type RichTextBlock,
+  type RichTextTextBlock,
+  type RichTextImageBlock,
+  type RichTextAlign,
+  type RichTextBlockType,
+} from './components/RichTextEditor'
