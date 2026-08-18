@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useRef } from 'react'
 import { View, Textarea, Image, BaseEventOrig, ITouchEvent } from '@tarojs/components'
 
 import { useTheme } from '../../config'
@@ -49,6 +49,19 @@ export interface RichTextEditorProps {
 
 const ALIGN_OPTIONS: RichTextAlign[] = ['left', 'center', 'right']
 
+const focusTextarea = (instance: any) => {
+  if (!instance) {
+    return
+  }
+
+  if (typeof instance.focus === 'function') {
+    instance.focus()
+    return
+  }
+
+  instance.querySelector?.('textarea')?.focus?.()
+}
+
 const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
   const {
     value = [],
@@ -58,6 +71,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
   } = props
 
   const { themeSelect } = useTheme()
+  const textareaRefs = useRef<Record<number, any>>({})
 
   const deleteBtnStyle = useMemo(() => ({
     backgroundColor: themeSelect('rgba(0, 0, 0, 0.5)', 'rgba(255, 255, 255, 0.5)'),
@@ -85,6 +99,10 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
     updateBlock(index, { align })
   }, [updateBlock])
 
+  const handleTextBlockClick = useCallback((index: number) => {
+    focusTextarea(textareaRefs.current[index])
+  }, [])
+
   return (
     <View className={formatClassNames(styles['rich-text-editor'], className)}>
       {value.map((block, index) => (
@@ -108,18 +126,27 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
           {
             block.type === 'text' 
             ? (
-              <View className={styles['text-block']}>
-                <Textarea
-                  className={formatClassNames(
-                    styles['editor-textarea'],
-                    styles[`is-align-${block.align || 'left'}`]
-                  )}
-                  value={block.content}
-                  placeholder={block?.placeholder || placeholder}
-                  maxlength={-1}
-                  autoHeight
-                  onInput={(e) => handleTextChange(index, e)}
-                />
+              <View
+                className={styles['text-block']}
+                onClick={() => handleTextBlockClick(index)}
+              >
+                <View className={styles['textarea-wrap']}>
+                  <Textarea
+                    ref={(node) => {
+                      textareaRefs.current[index] = node
+                    }}
+                    className={formatClassNames(
+                      styles['editor-textarea'],
+                      styles[`is-align-${block.align || 'left'}`]
+                    )}
+                    value={block.content}
+                    placeholder={block?.placeholder || placeholder}
+                    maxlength={-1}
+                    autoHeight
+                    disableDefaultPadding
+                    onInput={(e) => handleTextChange(index, e)}
+                  />
+                </View>
                 <View className={styles['align-toolbar']}>
                   {ALIGN_OPTIONS.map((align) => {
                     const active = (block.align || 'left') === align
