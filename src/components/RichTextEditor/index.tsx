@@ -123,16 +123,25 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
                 <View className={styles['align-toolbar']}>
                   {ALIGN_OPTIONS.map((align) => {
                     const active = (block.align || 'left') === align
+                    const disabled = !block.content?.trim()
                     return (
                       <View
                         key={align}
-                        className={styles['align-btn']}
-                        onClick={() => handleAlignChange(index, align)}
+                        className={formatClassNames(
+                          styles['align-btn'],
+                          disabled ? styles['is-disabled'] : ''
+                        )}
+                        onClick={() => {
+                          if (disabled) return
+                          handleAlignChange(index, align)
+                        }}
                       >
                         <Icon
                           name={`align-${align}`}
                           size={16}
-                          color={active ? 'var(--textTitle)' : 'var(--textMuted)'}
+                          color={disabled
+                            ? 'var(--textMuted)'
+                            : active ? 'var(--textTitle)' : 'var(--textMuted)'}
                         />
                       </View>
                     )
