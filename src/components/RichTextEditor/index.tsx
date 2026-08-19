@@ -97,9 +97,10 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
   const textareaRefs = useRef<Record<number, any>>({})
   const skipHeightSyncRef = useRef(false)
 
-  const deleteBtnStyle = useMemo(() => ({
-    backgroundColor: themeSelect('rgba(0, 0, 0, 0.5)', 'rgba(255, 255, 255, 0.5)'),
-  }), [themeSelect])
+  const deleteIconColor = useMemo(
+    () => themeSelect('rgba(0, 0, 0, 0.5)', 'rgba(255, 255, 255, 0.5)'),
+    [themeSelect]
+  )
 
   const updateBlock = useCallback((index: number, patch: Partial<RichTextBlock>) => {
     onChange?.(
@@ -175,14 +176,12 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
         >
           <View
             className={styles['delete-btn']}
-            style={deleteBtnStyle}
             onClick={(e) => handleDelete(e, index)}
           >
             <Icon
-              name='close'
-              size={10}
-              color="var(--containerCard)"
-              className={styles['delete-icon']}
+              name="close-circle-fill"
+              size={17}
+              color={deleteIconColor}
             />
           </View>
 
