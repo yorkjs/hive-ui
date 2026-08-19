@@ -28,6 +28,8 @@ export interface TableProps<T extends object> {
   dataSource: T[]
   /** 行唯一标识对应的数据字段 */
   rowKey: keyof T
+  /** 表头背景色 */
+  headerBackgroundColor?: string
   /** 自定义类名 */
   className?: string
   /** 自定义样式 */
@@ -99,6 +101,7 @@ function Table<T extends object>(props: TableProps<T>) {
     dataSource,
     columns,
     rowKey,
+    headerBackgroundColor,
     className,
     style,
   } = props
@@ -112,7 +115,10 @@ function Table<T extends object>(props: TableProps<T>) {
       className={formatClassNames(styles['table'], className)}
       style={style}
     >
-      <View className={styles['table-header']}>
+      <View
+        className={styles['table-header']}
+        style={headerBackgroundColor ? { background: headerBackgroundColor } : undefined}
+      >
         {
           columns.map(column => (
             <View
