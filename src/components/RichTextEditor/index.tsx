@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import { View, Textarea, Image, BaseEventOrig, ITouchEvent } from '@tarojs/components'
 
 import { useTheme } from '../../config'
@@ -49,6 +49,18 @@ export interface RichTextEditorProps {
 
 const ALIGN_OPTIONS: RichTextAlign[] = ['left', 'center', 'right']
 
+const getNativeTextarea = (instance: any): HTMLTextAreaElement | null => {
+  if (!instance) {
+    return null
+  }
+
+  if (instance.tagName === 'TEXTAREA') {
+    return instance
+  }
+
+  return instance.querySelector?.('textarea') || instance.textareaRef || null
+}
+
 const focusTextarea = (instance: any) => {
   if (!instance) {
     return
@@ -59,7 +71,18 @@ const focusTextarea = (instance: any) => {
     return
   }
 
-  instance.querySelector?.('textarea')?.focus?.()
+  getNativeTextarea(instance)?.focus?.()
+}
+
+const syncTextareaAutoHeight = (instance: any) => {
+  const textarea = getNativeTextarea(instance)
+  if (!textarea) {
+    return
+  }
+
+  textarea.style.overflow = 'hidden'
+  textarea.style.height = 'auto'
+  textarea.style.height = `${textarea.scrollHeight}px`
 }
 
 const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
@@ -72,6 +95,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
 
   const { themeSelect } = useTheme()
   const textareaRefs = useRef<Record<number, any>>({})
+  const skipHeightSyncRef = useRef(false)
 
   const deleteBtnStyle = useMemo(() => ({
     backgroundColor: themeSelect('rgba(0, 0, 0, 0.5)', 'rgba(255, 255, 255, 0.5)'),
@@ -92,7 +116,17 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
     index: number,
     e: BaseEventOrig<{ value: string }>
   ) => {
+    skipHeightSyncRef.current = true
     updateBlock(index, { content: e.detail.value })
+
+    const eventTarget = (e as any).target
+    const textarea = eventTarget?.tagName === 'TEXTAREA'
+      ? eventTarget
+      : textareaRefs.current[index]
+    syncTextareaAutoHeight(textarea)
+    requestAnimationFrame(() => {
+      syncTextareaAutoHeight(textareaRefs.current[index])
+    })
   }, [updateBlock])
 
   const handleAlignChange = useCallback((index: number, align: RichTextAlign) => {
@@ -102,6 +136,35 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
   const handleTextBlockClick = useCallback((index: number) => {
     focusTextarea(textareaRefs.current[index])
   }, [])
+
+  const handleImageDragStart = useCallback((e: React.DragEvent<HTMLImageElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }, [])
+
+  useEffect(() => {
+    if (skipHeightSyncRef.current) {
+      skipHeightSyncRef.current = false
+      return
+    }
+
+    const syncAll = () => {
+      value.forEach((block, index) => {
+        if (block.type !== 'text') {
+          return
+        }
+        syncTextareaAutoHeight(textareaRefs.current[index])
+      })
+    }
+
+    const rafId = requestAnimationFrame(syncAll)
+    const timer = setTimeout(syncAll, 0)
+
+    return () => {
+      cancelAnimationFrame(rafId)
+      clearTimeout(timer)
+    }
+  }, [value])
 
   return (
     <View className={formatClassNames(styles['rich-text-editor'], className)}>
@@ -182,6 +245,10 @@ const RichTextEditor: React.FC<RichTextEditorProps> = (props) => {
                   className={styles['image']}
                   src={block.url}
                   mode='widthFix'
+                  imgProps={{
+                    draggable: false,
+                    onDragStart: handleImageDragStart,
+                  }}
                 />
               </View>
             )

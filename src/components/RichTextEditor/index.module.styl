@@ -16,7 +16,7 @@
   .block
     position relative
     border-radius 10PX
-    halfBorder(top right bottom left, var(--lineBorder), 10PX)
+    halfBorder(top right bottom left, var(--lineBorder), 20PX)
 
     .delete-btn
       position absolute
@@ -38,6 +38,8 @@
         display block
 
     .text-block
+      background-color var(--containerCard)
+      border-radius 10PX
       padding 15PX 15PX 6PX
 
       .textarea-wrap
@@ -49,6 +51,7 @@
           font-size 14PX
           line-height 1.6
           color var(--textTitle)
+          overflow hidden
 
         &.is-align-left
           :global(.taro-textarea)
@@ -77,8 +80,13 @@
     .image-block
       overflow hidden
       border-radius 10PX
+      background-color var(--containerCard)
+      user-select none
 
       .image
         display block
         width 100%
         height auto
+        pointer-events none
+        user-select none
+        -webkit-user-drag none
