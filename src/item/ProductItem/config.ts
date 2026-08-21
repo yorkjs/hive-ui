@@ -26,6 +26,7 @@ let globalLabels: IProductCardLabels = {
   multiple_spec: '多规格',
   barcode_label: '条码',
   spec_label: '规格',
+  remaining_label: '剩余次数',
   sold_out: '售罄',
   offline: '已下架'
 }

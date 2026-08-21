@@ -36,6 +36,7 @@ export interface IProductCardLabels {
   multiple_spec?: string
   barcode_label?: string
   spec_label?: string
+  remaining_label?: string
   sold_out?: string
   offline?: string
 }
@@ -88,6 +89,10 @@ export interface IProductCardProps {
   salePrice: string | number
   /** 原价 (划线价) */
   originalPrice?: string | number
+  /** 剩余次数（次卡独立权益等场景） */
+  remainingCount?: number | string
+  /** 剩余次数对应的总次数（与 remainingCount 组成 剩余/总数） */
+  remainingTotal?: number | string
   /** 已购数量 (显示为 xN) */
   buyCount?: number
   /** 是否显示左侧勾选框 */
@@ -135,6 +140,8 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     salePricePrefix,
     salePrice,
     originalPrice,
+    remainingCount,
+    remainingTotal,
     buyCount,
     showSoldOut = false,
     showOffline = false,
@@ -347,6 +354,29 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
                   >
                     {labels.spec_label}：{spec}
                   </Text>
+                )
+                : undefined
+              }
+              {
+                remainingCount != null && remainingCount !== ''
+                ? (
+                  <View className={styles['remaining-row']}>
+                    <Text className={styles['remaining-label']}>
+                      {labels.remaining_label}：
+                    </Text>
+                    <Text className={styles['remaining-value']}>
+                      {remainingCount}
+                    </Text>
+                    {
+                      remainingTotal != null && remainingTotal !== ''
+                      ? (
+                        <Text className={styles['remaining-total']}>
+                          /{remainingTotal}
+                        </Text>
+                      )
+                      : undefined
+                    }
+                  </View>
                 )
                 : undefined
               }
