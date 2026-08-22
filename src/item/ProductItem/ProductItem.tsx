@@ -267,6 +267,25 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     )
   }, [stockCount, saleCount, labels])
 
+  const remainingElem = useMemo(() => {
+    if (remainingCount == null || remainingCount === '') return null
+    return (
+      <View className={styles['remaining-box']}>
+        <Text className={styles['info-text']}>{labels.remaining_label}</Text>
+        <Text className={styles['remaining-value']}>{remainingCount}</Text>
+        {
+          remainingTotal != null && remainingTotal !== ''
+          ? (
+            <Text className={styles['remaining-total']}>
+              /{remainingTotal}
+            </Text>
+          )
+          : undefined
+        }
+      </View>
+    )
+  }, [remainingCount, remainingTotal, labels])
+
   return (
     <View
       className={formatClassNames(
@@ -314,13 +333,15 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
                 {productTypeTag}
                 <Text className={styles['title']} style={{ WebkitLineClamp: titleMaxLines }}>{title}</Text>
               </View>
-              {(showMultipleSpec || stockCount || saleCount || barcode) && (
+              {(showMultipleSpec || stockCount || saleCount || barcode || remainingElem) && (
                 <ScrollView scrollX className={styles['second-row']} showScrollbar={false}>
                   <View className={styles['second-row-inner']}>
                     {showMultipleSpec && <Text className={styles['primary-text']}>{labels.multiple_spec}</Text>}
                     {showMultipleSpec && stockAndSaleElem && <View className={styles['info-line']} />}
                     {stockAndSaleElem}
-                    {((showMultipleSpec || stockAndSaleElem) && barcode) && <View className={styles['info-line']} />}
+                    {(showMultipleSpec || stockAndSaleElem) && remainingElem && <View className={styles['info-line']} />}
+                    {remainingElem}
+                    {((showMultipleSpec || stockAndSaleElem || remainingElem) && barcode) && <View className={styles['info-line']} />}
                     {barcode && <Text className={styles['info-text']}>{labels.barcode_label} {barcode}</Text>}
                   </View>
                 </ScrollView>
@@ -354,29 +375,6 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
                   >
                     {labels.spec_label}：{spec}
                   </Text>
-                )
-                : undefined
-              }
-              {
-                remainingCount != null && remainingCount !== ''
-                ? (
-                  <View className={styles['remaining-row']}>
-                    <Text className={styles['remaining-label']}>
-                      {labels.remaining_label}：
-                    </Text>
-                    <Text className={styles['remaining-value']}>
-                      {remainingCount}
-                    </Text>
-                    {
-                      remainingTotal != null && remainingTotal !== ''
-                      ? (
-                        <Text className={styles['remaining-total']}>
-                          /{remainingTotal}
-                        </Text>
-                      )
-                      : undefined
-                    }
-                  </View>
                 )
                 : undefined
               }
