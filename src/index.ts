@@ -15,6 +15,7 @@ export { default as Alert } from './components/Alert'
 export { default as Switch } from './components/Switch'
 export { default as SimpleModal } from './components/SimpleModal'
 export { default as Progress } from './components/Progress'
+export { default as StatsCard, type StatsCardItem, type StatsCardProps } from './components/StatsCard'
 
 export { default as FlowItem } from './item/FlowItem'
 export { default as ListItem } from './item/ListItem'
