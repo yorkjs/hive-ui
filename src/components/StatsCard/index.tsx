@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { View, Text } from '@tarojs/components'
 
+import Card from '../Card'
 import { formatClassNames } from '../../util/function'
 
 import styles from './index.module.styl'
@@ -21,8 +22,6 @@ export interface StatsCardProps {
   items: StatsCardItem[]
   /** 自定义类名 */
   className?: string
-  /** 自定义样式 */
-  style?: React.CSSProperties
   /** 是否显示顶部间距 */
   showTopGutter?: boolean
   /** 是否显示底部间距 */
@@ -34,20 +33,16 @@ const StatsCard: React.FC<StatsCardProps> = ({
   title,
   items,
   className,
-  style,
   showTopGutter = false,
   showBottomGutter = false,
 }) => (
-  <View
+  <Card
     className={formatClassNames(
       styles['stats-card'],
-      {
-        [styles['show-top-gutter']]: showTopGutter,
-        [styles['show-bottom-gutter']]: showBottomGutter,
-      },
       className
     )}
-    style={style}
+    showTopGutter={showTopGutter}
+    showBottomGutter={showBottomGutter}
   >
     {title !== undefined && title !== null && (
       <View className={styles['card-title']}>
@@ -73,7 +68,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
         </Fragment>
       ))}
     </View>
-  </View>
+  </Card>
 )
 
 export default StatsCard
