@@ -49,6 +49,10 @@ export interface IProductCardProps {
   image: { url: string }
   /** 是否显示售罄标记 */
   showSoldOut?: boolean
+  /** 是否显图片上的遮罩 */
+  showImageOverlay?: boolean
+  /** 遮罩文案 */
+  imageOverlayText?: string
   /** 是否显示已下架标记 */
   showOffline?: boolean
   /** 商品标题 */
@@ -144,6 +148,8 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     remainingTotal,
     buyCount,
     showSoldOut = false,
+    showImageOverlay = false,
+    imageOverlayText = '',
     showOffline = false,
     showCheckbox = false,
     checkboxChecked = false,
@@ -158,6 +164,10 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     onClick,
     children
   } = props
+
+  const isOverlayVisible = useMemo(() => {
+    return showSoldOut || showOffline || showImageOverlay
+  }, [showSoldOut, showOffline, showImageOverlay])
 
   const handleCardClick = (e: ITouchEvent) => {
     if (showCheckbox) {
@@ -319,10 +329,10 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
               className={styles['product-image']}
               mode='aspectFill'
             />
-            {(showSoldOut || showOffline) && (
+            {isOverlayVisible && (
               <View className={styles['status-overlay']}>
                 <Text className={styles['status-text']}>
-                  {showSoldOut ? labels.sold_out : labels.offline}
+                  {showImageOverlay ? imageOverlayText : showSoldOut ? labels.sold_out : labels.offline}
                 </Text>
               </View>
             )}
