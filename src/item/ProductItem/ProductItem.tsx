@@ -61,6 +61,8 @@ export interface IProductCardProps {
   titleMaxLines?: number
   /** 商品类型：实物/虚拟/服务 */
   productType?: number
+  /** 自定义商品类型 */
+  productTypeCustom?: { color: string; text: string, backgroundColor?: string }
   /** 是否显示“多规格”标签 */
   showMultipleSpec?: boolean
   /** 库存数量文案 */
@@ -128,6 +130,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
     title,
     titleMaxLines = 1,
     productType,
+    productTypeCustom,
     customTags,
     showMultipleSpec,
     stockCount,
@@ -188,7 +191,27 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
   }, [])
 
   const productTypeTag = useMemo(() => {
-    if (productType === undefined) return null
+    
+    if (productTypeCustom) {
+      return (
+        <View className={styles['product-tag-container']}>
+          <Tag
+            type='light-warning'
+            text={productTypeCustom.text}
+            className="product-tag"
+            style={{ 
+              backgroundColor: productTypeCustom.backgroundColor, 
+              color: productTypeCustom.color
+           }}
+          />
+        </View>
+      )
+    }
+
+    if (productType === undefined) {
+      return null
+    }
+
     const colorMap: Record<number, { color: string; text: string | undefined }> = {
     [MALL_PRODUCT_TYPE_REAL]: {
       color: 'var(--primary)',
@@ -219,7 +242,7 @@ const ProductItem: React.FC<IProductCardProps> = (props) => {
         />
       </View>
     )
-  }, [productType, labels])
+  }, [productType, labels, productTypeCustom])
 
   const deliveryTags = useMemo(() => {
     if (isEmpty(deliveryTypes)) return null
