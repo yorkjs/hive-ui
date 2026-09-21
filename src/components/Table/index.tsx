@@ -21,8 +21,7 @@ export interface TableColumn<T extends object> {
   render?: (value: T[keyof T], record: T, index: number) => React.ReactNode
 }
 
-type TableTextAlign = 'left' | 'center' | 'right'
-export { TableTextAlign }
+export type TableTextAlign = 'left' | 'center' | 'right'
 
 export interface TableProps<T extends object> {
   /** 列配置 */
