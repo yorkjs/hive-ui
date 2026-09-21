@@ -1,5 +1,4 @@
 export { setGlobalTheme, useTheme } from './config'
-
 export { default as Card } from './components/Card'
 export { default as NumberKeyboard } from './components/NumberKeyboard'
 export { default as Cell, setCellConfig } from './components/Cell'
@@ -15,24 +14,22 @@ export { default as Alert } from './components/Alert'
 export { default as Switch } from './components/Switch'
 export { default as SimpleModal } from './components/SimpleModal'
 export { default as Progress } from './components/Progress'
-export { default as StatsCard, type StatsCardItem, type StatsCardProps } from './components/StatsCard'
+export { default as StatsCard } from './components/StatsCard'
+export type { StatsCardItem, StatsCardProps } from './components/StatsCard'
 
 export { default as FlowItem } from './item/FlowItem'
 export { default as ListItem } from './item/ListItem'
 export { default as ProductItem, setProductItemConfig } from './item/ProductItem'
 
-export {
-  default as Table,
-  type TableProps,
-  type TableColumn,
-} from './components/Table'
+export { default as Table } from './components/Table'
+export type { TableProps, TableColumn } from './components/Table'
 
-export {
-  default as RichTextEditor,
-  type RichTextEditorProps,
-  type RichTextBlock,
-  type RichTextTextBlock,
-  type RichTextImageBlock,
-  type RichTextAlign,
-  type RichTextBlockType,
+export { default as RichTextEditor } from './components/RichTextEditor'
+export type {
+  RichTextEditorProps,
+  RichTextBlock,
+  RichTextTextBlock,
+  RichTextImageBlock,
+  RichTextAlign,
+  RichTextBlockType,
 } from './components/RichTextEditor'
