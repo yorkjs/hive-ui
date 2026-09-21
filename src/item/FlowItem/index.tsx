@@ -21,6 +21,10 @@ interface IProps {
   amount?: string | number
   /** 金额颜色，不传默认 */
   amountColor?: string
+  /** 金额右侧的状态文字（如"已退款"） */
+  amountStatus?: string
+  /** 状态文字颜色 */
+  amountStatusColor?: string
   /** 右侧下方的描述或状态 */
   desc?: string
   /** 描述文字颜色 */
@@ -40,6 +44,8 @@ const FlowItem: React.FC<IProps> = (props) => {
     titleExtra,
     amount,
     amountColor,
+    amountStatus,
+    amountStatusColor,
     desc,
     descColor,
     showSeparator = true,
@@ -128,12 +134,26 @@ const FlowItem: React.FC<IProps> = (props) => {
           {
             amount !== undefined
             ? (
-              <Text
-                className="flow-item-amount"
-                style={amountColor ? { color: amountColor } : {}}
-              >
-                {amount}
-              </Text>
+              <View className="flow-item-amount-row">
+                <Text
+                  className="flow-item-amount"
+                  style={amountColor ? { color: amountColor } : {}}
+                >
+                  {amount}
+                </Text>
+                {
+                  !isEmpty(amountStatus)
+                  ? (
+                    <Text
+                      className="flow-item-amount-status"
+                      style={amountStatusColor ? { color: amountStatusColor } : {}}
+                    >
+                      {amountStatus}
+                    </Text>
+                  )
+                  : undefined
+                }
+              </View>
             )
             : undefined
           }
