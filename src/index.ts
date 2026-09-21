@@ -15,7 +15,7 @@ export { default as Alert } from './components/Alert'
 export { default as Switch } from './components/Switch'
 export { default as SimpleModal } from './components/SimpleModal'
 export { default as Progress } from './components/Progress'
-export { default as StatsCard, type StatsCardItem, type StatsCardProps } from './components/StatsCard'
+export { default as StatsCard, StatsCardItem, StatsCardProps } from './components/StatsCard'
 
 export { default as FlowItem } from './item/FlowItem'
 export { default as ListItem } from './item/ListItem'
@@ -23,16 +23,16 @@ export { default as ProductItem, setProductItemConfig } from './item/ProductItem
 
 export {
   default as Table,
-  type TableProps,
-  type TableColumn,
+  TableProps,
+  TableColumn,
 } from './components/Table'
 
 export {
   default as RichTextEditor,
-  type RichTextEditorProps,
-  type RichTextBlock,
-  type RichTextTextBlock,
-  type RichTextImageBlock,
-  type RichTextAlign,
-  type RichTextBlockType,
+  RichTextEditorProps,
+  RichTextBlock,
+  RichTextTextBlock,
+  RichTextImageBlock,
+  RichTextAlign,
+  RichTextBlockType,
 } from './components/RichTextEditor'
