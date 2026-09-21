@@ -8,7 +8,8 @@ import Icon from '../Icon'
 
 import styles from './index.module.styl'
 
-export type AlertType = 'success' | 'error' | 'primary' | 'warning'
+type AlertType = 'success' | 'error' | 'primary' | 'warning'
+export { AlertType }
 
 export interface AlertProps {
   message: React.ReactNode

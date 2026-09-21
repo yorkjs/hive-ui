@@ -8,9 +8,11 @@ import Icon from '../Icon'
 import styles from './index.module.styl'
 
 /** 文本对齐方式 */
-export type RichTextAlign = 'left' | 'center' | 'right'
+type RichTextAlign = 'left' | 'center' | 'right'
+export { RichTextAlign }
 
-export type RichTextBlockType = 'text' | 'image'
+type RichTextBlockType = 'text' | 'image'
+export { RichTextBlockType }
 
 interface RichTextBlockBase {
   /** 可选唯一标识 ，便于后续排序等扩展；未传时用下标 */
@@ -34,7 +36,8 @@ export interface RichTextImageBlock extends RichTextBlockBase {
   url: string
 }
 
-export type RichTextBlock = RichTextTextBlock | RichTextImageBlock
+type RichTextBlock = RichTextTextBlock | RichTextImageBlock
+export { RichTextBlock }
 
 export interface RichTextEditorProps {
   /** 块列表（受控） */

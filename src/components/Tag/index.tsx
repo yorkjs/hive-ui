@@ -6,7 +6,7 @@ import { formatClassNames } from '../../util/function'
 
 import styles from './index.module.styl'
 
-export type TagType = 'default'
+type TagType = 'default'
   | 'success'
   | 'info'
   | 'error'
@@ -17,6 +17,8 @@ export type TagType = 'default'
   | 'light-success'
   | 'light-error'
   | 'light-warning'
+
+export { TagType }
 
 interface TagProps {
   type?: TagType

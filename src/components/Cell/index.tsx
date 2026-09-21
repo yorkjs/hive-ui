@@ -6,9 +6,9 @@ import CellValue from './CellValue'
 import CellArrow from './CellArrow'
 import CellDescription from './CellDescription'
 
-export type { CellProps } from './Cell'
-export type { CellCardProps } from './CellCard'
-export type { CellTitleProps } from './CellTitle'
+export { CellProps } from './Cell'
+export { CellCardProps } from './CellCard'
+export { CellTitleProps } from './CellTitle'
 
 export { setCellConfig } from './config'
 
