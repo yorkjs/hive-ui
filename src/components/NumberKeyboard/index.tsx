@@ -24,6 +24,10 @@ interface IProps {
   doneText?: string
   /** 完成按钮点击 */
   onDone?: () => void
+  /** 左下角按键自定义文案，覆盖默认的小数点/X */
+  bottomKeyText?: string
+  /** 左下角按键自定义点击事件，不传则默认调用 onInsert */
+  onBottomKeyClick?: () => void
   /** 外部样式名 */
   className?: string
 }
@@ -37,26 +41,33 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
     title,
     doneText = '完成',
     onDone,
+    bottomKeyText,
+    onBottomKeyClick,
     className
   } = props
 
+  const bottomKey = useMemo(() => {
+    if (bottomKeyText !== undefined) return bottomKeyText
+    if (type === 'number') return '.'
+    if (type === 'idCard') return 'X'
+    return ''
+  }, [type, bottomKeyText])
+
   const keys = useMemo(() => {
-    let leftBottomKey = ''
-    if (type === 'number') {
-      leftBottomKey = '.'
-    }
-    else if (type === 'idCard') {
-      leftBottomKey = 'X'
-    }
-    return ['1', '2', '3', '4', '5', '6', '7', '8', '9', leftBottomKey, '0', 'delete']
-  }, [type])
+    return ['1', '2', '3', '4', '5', '6', '7', '8', '9', bottomKey, '0', 'delete']
+  }, [bottomKey])
 
   const handleKeyPress = (key: string) => {
     if (key === 'delete') {
       onDelete()
     }
     else if (key !== '') {
-      onInsert(key)
+      const isBottomKey = key === bottomKey && bottomKey !== ''
+      if (isBottomKey && onBottomKeyClick) {
+        onBottomKeyClick()
+      } else {
+        onInsert(key)
+      }
     }
   }
 
@@ -88,7 +99,7 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
       <View className={"keyboard-grid"}>
         {keys.map((key, index) => {
           const isDelete = key === 'delete'
-          const isEmptyKey = key === '' && type === 'int'
+          const isEmptyKey = key === ''
 
           return (
             <View
