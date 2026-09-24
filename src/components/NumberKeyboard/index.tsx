@@ -28,6 +28,8 @@ interface IProps {
   bottomKeyText?: string
   /** 左下角按键自定义点击事件，不传则默认调用 onInsert */
   onBottomKeyClick?: () => void
+  /** 左下角按键自定义样式名 */
+  bottomKeyClassName?: string
   /** 外部样式名 */
   className?: string
 }
@@ -43,6 +45,7 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
     onDone,
     bottomKeyText,
     onBottomKeyClick,
+    bottomKeyClassName,
     className
   } = props
 
@@ -100,6 +103,7 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
         {keys.map((key, index) => {
           const isDelete = key === 'delete'
           const isEmptyKey = key === ''
+          const isBottomKey = !isEmptyKey && key === bottomKey && bottomKey !== ''
 
           return (
             <View
@@ -108,7 +112,7 @@ const NumberKeyboard: React.FC<IProps> = (props) => {
                 'empty-key': isEmptyKey,
                 'no-right-border': (index + 1) % 3 === 0,
                 'last-row': index >= 9
-              })}
+              }, isBottomKey ? bottomKeyClassName : '')}
               onClick={() => !isEmptyKey && handleKeyPress(key)}
             >
               {
